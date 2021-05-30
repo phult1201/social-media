@@ -18,3 +18,6 @@ code {
   margin: 0 auto;
   background-color: #fff;
 }
+
+/* Auth */
+@import url("./styles/auth.css");
