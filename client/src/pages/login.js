@@ -42,6 +42,7 @@ const Login = () => {
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input
+            autoComplete="on"
             type="password"
             className="form-control"
             id="exampleInputPassword1"
@@ -51,7 +52,11 @@ const Login = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary w-100" disabled={email && password ? false : true}>
+        <button
+          type="submit"
+          className="btn btn-primary w-100"
+          disabled={email && password ? false : true}
+        >
           Submit
         </button>
 
