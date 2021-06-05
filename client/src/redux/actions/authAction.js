@@ -49,6 +49,21 @@ export const register = (data) => {
   };
 };
 
+export const logout = () => {
+  return async (dispatch) => {
+    try {
+      localStorage.removeItem("firstLogin");
+      await postDataAPI("logout");
+      window.location.href = "/";
+    } catch (error) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};
+
 export const refreshtoken = () => {
   return async (dispatch) => {
     const firstLogin = localStorage.getItem("firstLogin");
@@ -58,7 +73,7 @@ export const refreshtoken = () => {
         const res = await postDataAPI("refresh_token");
         dispatch({
           type: GLOBALTYPES.AUTH,
-          payload: { token: res.data.access_token, user: res.data.user },
+          payload: { access_token: res.data.access_token, user: res.data.user },
         });
         dispatch({ type: GLOBALTYPES.ALERT, payload: {} });
       } catch (error) {

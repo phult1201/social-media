@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { register } from "../redux/actions/authAction";
 
 const Register = () => {
@@ -14,15 +14,8 @@ const Register = () => {
     gender: "male",
   };
   const [userData, setUserData] = useState(initialState);
-  const {
-    email,
-    password,
-    firstname,
-    lastname,
-    cf_password,
-    username,
-    gender,
-  } = userData;
+  const { email, password, firstname, lastname, cf_password, username } =
+    userData;
   const { auth, alert } = useSelector((state) => state);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -38,10 +31,10 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (auth.token) {
+    if (auth.access_token) {
       history.push("/");
     }
-  }, [auth.token, history]);
+  }, [auth.access_token, history]);
 
   return (
     <div className="auth_page">
@@ -177,7 +170,7 @@ const Register = () => {
         <p className="my-2">
           {" "}
           You already have an account{" "}
-          <Link to="/register" style={{ color: "crimson" }}>
+          <Link to="/login" style={{ color: "crimson" }}>
             Login Now
           </Link>
         </p>
