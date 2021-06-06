@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Alert from "./components/alert/alert";
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import PageRender from "./customRouter/PageRender";
 import PrivateRouter from "./customRouter/PrivateRouter";
 import Home from "./pages/home";

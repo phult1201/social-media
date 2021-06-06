@@ -32,5 +32,11 @@ img {
 /* Auth */
 @import url("./styles/auth.css");
 
+/* Loading */
+@import url("./styles/loading.css");
+
 /* Header */
 @import url("./styles/header.css");
+
+/* Avatar */
+@import url("./styles/avatar.css");

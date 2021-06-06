@@ -14,6 +14,7 @@ app.use(cookieParser());
 app.use(morgan("tiny"));
 
 // Routes
+app.use("/api", require("./routes/authRouter"));
 app.use("/api", require("./routes/userRouter"));
 
 // Connect to server
