@@ -1,0 +1,101 @@
+.auth {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fdfdfd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 1.6rem;
+  color: #4a4e69;
+
+  &_form {
+    background-color: #ffff;
+    max-width: 400px;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 50px 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    & > * {
+      margin-bottom: 15px;
+    }
+  }
+
+  &_title {
+    font-size: 3.2rem;
+  }
+
+  &_row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 20px;
+
+    &--space-around {
+      justify-content: space-around;
+    }
+
+    &--half {
+      width: 45%;
+      display: inline-block;
+      &:nth-child(1n + 2) {
+        margin-left: 10%;
+      }
+    }
+
+    &_label-text {
+      position: absolute;
+      left: 2px;
+      color: rgba(74, 78, 105, 0.5);
+    }
+
+    input {
+      width: 100%;
+      outline: none;
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid #ccc;
+      text-indent: 2px;
+      font-size: 1.6rem;
+      padding: 4px 0;
+      transition: border-bottom 0.2s ease-in;
+
+      &:focus,
+      &:valid {
+        border-bottom: 1px solid #4a4e69;
+        background-color: #e8f0fe;
+        color: #4a4e69;
+      }
+
+      &:focus ~ label,
+      &:valid ~ label {
+        top: 0;
+        color: #4a4e69;
+      }
+    }
+
+    small {
+      color: rgb(220, 20, 60);
+    }
+  }
+
+  &_btn {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    padding: 8px 32px;
+    color: #fff;
+    border-radius: 2px;
+    background-color: rgba(74, 78, 105, 0.8);
+    transition: background-color 100ms ease-in;
+    &:hover {
+      background-color: rgba(74, 78, 105, 1);
+    }
+  }
+}

@@ -13,7 +13,8 @@ const Search = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (search) {
+    const timeOutId = setTimeout(() => {
+      console.log("Run timeout");
       getDataAPI(`search?username=${search}`, auth.access_token)
         .then((res) => setUsers(res.data))
         .catch((error) => {
@@ -22,7 +23,12 @@ const Search = () => {
             payload: { error: error.response.data.msg },
           });
         });
-    }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeOutId);
+      console.log("Run clear time out");
+    };
   }, [search, auth.access_token, dispatch]);
 
   const handleClose = () => {
@@ -42,31 +48,34 @@ const Search = () => {
         }
       />
 
-      <div className="search_icon" style={{ opacity: search ? 0 : 0.3 }}>
-        <span className="material-icons">search</span>
-        <span>Search</span>
-      </div>
-      <div
-        className="search_close"
-        style={{ opacity: search ? 1 : 0.3 }}
-        onClick={handleClose}
-      >
-        &times;
-      </div>
-      <div className="users">
-        {search &&
-          users.map((user) => {
+      {!search && (
+        <div className="search_form-icon">
+          <span className="material-icons">search</span>
+          <span>Search</span>
+        </div>
+      )}
+
+      {search && (
+        <div className="search_form-close" onClick={handleClose}>
+          &times;
+        </div>
+      )}
+
+      {search && (
+        <div className="search_form-users">
+          {users.map((user) => {
             return (
               <Link
                 key={user._id}
                 to={`/profile/${user._id}`}
                 onClick={handleClose}
               >
-                <UserCard user={user} border="border" />
+                <UserCard user={user} />
               </Link>
             );
           })}
-      </div>
+        </div>
+      )}
     </form>
   );
 };

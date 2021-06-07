@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/authAction";
 
 const Menu = () => {
@@ -10,54 +10,59 @@ const Menu = () => {
     { label: "Discover", icon: "explore", path: "/discover" },
     { label: "Notify", icon: "favorite", path: "/notify" },
   ];
-
+  const [show, setShow] = useState(false);
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const { pathname } = useLocation();
 
   const isActive = (isPath) => {
-    if (isPath === pathname) return "active";
+    if (isPath === pathname) return "menu_list-item--active";
   };
+
   return (
-    <div className="menu" id="navbarSupportedContent">
-      <ul className="navbar-nav flex-row" style={{ alignItems: "center" }}>
+    <div className="menu">
+      <ul className="menu_list">
         {navLinks.map((link, index) => (
-          <li className={`nav-item mr-2 ${isActive(link.path)}`} key={index}>
-            <Link className="nav-link" to={link.path}>
+          <li key={index}>
+            <Link
+              className={`menu_list-item ${isActive(link.path)}`}
+              to={link.path}
+            >
               <span className="material-icons">{link.icon}</span>
             </Link>
           </li>
         ))}
 
-        <li className="nav-item dropdown">
-          <span
-            className="nav-link dropdown-toggle"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <img src={auth.user.avatar} alt="avatar" className="avatar" />
-          </span>
-          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
-              Profile
-            </Link>
-            <Link className="dropdown-item" to="/">
-              Dark mode
-            </Link>
-            <div className="dropdown-divider"></div>
-            <Link
-              className="dropdown-item"
-              to="/"
-              onClick={() => dispatch(logout())}
-            >
-              Logout
-            </Link>
-          </div>
-        </li>
+        <div className="menu_avatar" onClick={() => setShow(!show)}>
+          <img
+            className="menu_avatar-img"
+            src={auth.user.avatar}
+            alt="avatar"
+          />
+
+          {show && (
+            <ul className="menu_avatar-list">
+              <li>
+                <span className="material-icons">account_circle</span>
+                <Link to={`/profile/${auth.user._id}`}>Profile</Link>
+              </li>
+              <li>
+                <span className="material-icons">nightlight_round</span>
+                <Link to="/">Dark mode</Link>
+              </li>
+              <li>
+                <span className="material-icons">logout</span>
+                <Link to="/" onClick={() => dispatch(logout())}>
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          )}
+        </div>
+        {show && (
+          <div className="menu_overlay" onClick={() => setShow(!show)}></div>
+        )}
       </ul>
     </div>
   );

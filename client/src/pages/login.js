@@ -28,40 +28,43 @@ const Login = () => {
   }, [auth.access_token, history]);
 
   return (
-    <div className="auth_page">
-      <form onSubmit={handleSubmit}>
-        <h3 className="text-uppercase text-center mb-4">Social-Network</h3>
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email address</label>
+    <div className="auth">
+      <form onSubmit={handleSubmit} className="auth_form">
+        <h3 className="auth_title">Social-Network</h3>
+        <div className="auth_row">
           <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            type="text"
             name="email"
+            id="exampleInputEmail1"
             onChange={handleChangeInput}
+            required={true}
             value={email}
           />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
+          <label htmlFor="exampleInputEmail1" className="auth_row_label-text">
+            User name
+          </label>
         </div>
-        <div className="form-group">
-          <label htmlFor="exampleInputPassword1">Password</label>
+        <div className="auth_row">
           <input
             autoComplete="on"
             type="password"
-            className="form-control"
-            id="exampleInputPassword1"
             name="password"
+            id="exampleInputPassword1"
             onChange={handleChangeInput}
             value={password}
+            required={true}
           />
+          <label
+            htmlFor="exampleInputPassword1"
+            className="auth_row_label-text"
+          >
+            Password
+          </label>
         </div>
 
         <button
           type="submit"
-          className="btn btn-primary w-100"
+          className="auth_btn"
           disabled={email && password ? false : true}
         >
           Submit

@@ -37,105 +37,122 @@ const Register = () => {
   }, [auth.access_token, history]);
 
   return (
-    <div className="auth_page">
-      <form onSubmit={handleSubmit}>
-        <h3 className="text-uppercase text-center mb-4">Social-Network</h3>
+    <div className="auth">
+      <form onSubmit={handleSubmit} className="auth_form">
+        <h3 className="auth_title">Social-Network</h3>
 
-        <div className="form-group row">
-          <div className="col">
-            <label htmlFor="firstname">First name</label>
+        <div className="auth_row">
+          <div className="auth_row auth_row--half">
             <input
               type="text"
-              className={`form-control ${alert.firstname ? "is-invalid" : ""}`}
               id="firstname"
               name="firstname"
               onChange={handleChangeInput}
               value={firstname}
+              required={true}
             />
+            <label htmlFor="firstname" className="auth_row_label-text">
+              First name
+            </label>
             <small className="form-text text-danger">
               {alert.firstname ? alert.firstname : ""}
             </small>
           </div>
 
-          <div className="col">
-            <label htmlFor="lastname">Last name</label>
+          <div className="auth_row auth_row--half">
             <input
               type="text"
-              className={`form-control ${alert.lastname ? "is-invalid" : ""}`}
               id="lastname"
               name="lastname"
               onChange={handleChangeInput}
               value={lastname}
+              required={true}
             />
+            <label htmlFor="lastname" className="auth_row_label-text">
+              Last name
+            </label>
+
             <small className="form-text text-danger">
               {alert.lastname ? alert.lastname : ""}
             </small>
           </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="username">User name</label>
+        <div className="auth_row">
           <input
             type="text"
-            className={`form-control ${alert.username ? "is-invalid" : ""}`}
             id="username"
             name="username"
             onChange={handleChangeInput}
             value={username.toLowerCase().replace(/ /g, "")}
+            required={true}
           />
+          <label htmlFor="username" className="auth_row_label-text">
+            User name
+          </label>
+
           <small className="form-text text-danger">
             {alert.username ? alert.username : ""}
           </small>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="exampleInputEmail1">Email address</label>
+        <div className="auth_row">
           <input
-            type="email"
-            className={`form-control ${alert.email ? "is-invalid" : ""}`}
+            type="text"
             id="exampleInputEmail1"
-            aria-describedby="emailHelp"
             name="email"
             onChange={handleChangeInput}
             value={email}
+            required={true}
           />
+          <label htmlFor="exampleInputEmail1" className="auth_row_label-text">
+            Email address
+          </label>
+
           <small className="form-text text-danger">
             {alert.email ? alert.email : ""}
           </small>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
+        <div className="auth_row">
           <input
             autoComplete="on"
             type="password"
-            className={`form-control ${alert.password ? "is-invalid" : ""}`}
             id="password"
             name="password"
             onChange={handleChangeInput}
             value={password}
+            required={true}
           />
+          <label htmlFor="password" className="auth_row_label-text">
+            Password
+          </label>
+
           <small className="form-text text-danger">
             {alert.password ? alert.password : ""}
           </small>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="cf_password">Confirm Password</label>
+        <div className="auth_row">
           <input
             autoComplete="on"
             type="password"
-            className={`form-control ${alert.cf_password ? "is-invalid" : ""}`}
+            id="cf_password"
             name="cf_password"
             onChange={handleChangeInput}
             value={cf_password}
+            required={true}
           />
+          <label htmlFor="cf_password" className="auth_row_label-text">
+            Confirm Password
+          </label>
+
           <small className="form-text text-danger">
             {alert.cf_password ? alert.cf_password : ""}
           </small>
         </div>
 
-        <div className="row justify-conten-between mx-0 mb-1">
+        <div className="auth_row auth_row--space-around">
           <label htmlFor="male" className="col">
             Male:{" "}
             <input
@@ -159,11 +176,7 @@ const Register = () => {
           </label>
         </div>
 
-        <button
-          type="submit"
-          className="btn btn-dark w-100"
-          // disabled={email && password ? false : true}
-        >
+        <button type="submit" className="auth_btn">
           Register
         </button>
 
