@@ -3,6 +3,7 @@
 
 :root {
   font-size: 62.5%;
+  overflow-x: hidden;
 }
 
 * {
@@ -40,7 +41,10 @@ img {
 @import url("./styles/auth/auth.css");
 
 /* Loading */
-@import url("./styles/loading/loading.css");
+@import url("./styles/alert/loading.css");
 
 /* Header */
 @import url("./styles/header/header.css");
+
+/* Toast */
+@import url("./styles/alert/toast.css");

@@ -1,23 +1,23 @@
 import React from "react";
 
-const Toast = ({ msg, handleShow, bgColor }) => {
+const Toast = ({ msg, handleShow }) => {
   return (
-    <div
-      className={`toast show position-fixed text-light ${bgColor}`}
-      style={{ top: "5px", right: "5px", minWidth: "200px", zIndex: 50 }}
-    >
-      <div className={`toast-header ${bgColor}`}>
-        <strong className="mr-auto text-light">{msg.title}</strong>
-        <button
-          className="ml-2 mb-1 close"
-          data-dismiss="toast"
-          aria-label="Close"
-          onClick={handleShow}
-        >
-          &times;
-        </button>
+    <div className={`toast`} style={{ borderLeftColor: `${msg.color}` }}>
+      <span
+        className="material-icons toast_icon"
+        style={{ color: `${msg.color}` }}
+      >
+        {msg.icon}
+      </span>
+      <div className={`toast_header`}>
+        <h3 className="toast_title" style={{ color: `${msg.color}` }}>
+          {msg.title}
+        </h3>
+        <div className="toast_body">{msg.body}</div>
       </div>
-      <div className="toast-body">{msg.body}</div>
+      <span className="material-icons toast_close" onClick={handleShow}>
+        clear
+      </span>
     </div>
   );
 };

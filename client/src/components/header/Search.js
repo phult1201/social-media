@@ -14,7 +14,6 @@ const Search = () => {
 
   useEffect(() => {
     const timeOutId = setTimeout(() => {
-      console.log("Run timeout");
       getDataAPI(`search?username=${search}`, auth.access_token)
         .then((res) => setUsers(res.data))
         .catch((error) => {
@@ -26,8 +25,8 @@ const Search = () => {
     }, 1000);
 
     return () => {
+      setUsers([]);
       clearTimeout(timeOutId);
-      console.log("Run clear time out");
     };
   }, [search, auth.access_token, dispatch]);
 
