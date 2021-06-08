@@ -14,14 +14,16 @@ const Search = () => {
 
   useEffect(() => {
     const timeOutId = setTimeout(() => {
-      getDataAPI(`search?username=${search}`, auth.access_token)
-        .then((res) => setUsers(res.data))
-        .catch((error) => {
-          dispatch({
-            type: GLOBALTYPES.ALERT,
-            payload: { error: error.response.data.msg },
+      if (search) {
+        getDataAPI(`search?username=${search}`, auth.access_token)
+          .then((res) => setUsers(res.data))
+          .catch((error) => {
+            dispatch({
+              type: GLOBALTYPES.ALERT,
+              payload: { error: error.response.data.msg },
+            });
           });
-        });
+      }
     }, 1000);
 
     return () => {

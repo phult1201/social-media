@@ -48,3 +48,6 @@ img {
 
 /* Toast */
 @import url("./styles/alert/toast.css");
+
+/* Profile */
+@import url("./styles/profile/infor.css");
