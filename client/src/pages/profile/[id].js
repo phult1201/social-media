@@ -1,11 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import Loading from "../../components/alert/loading";
 import Infor from "../../components/profile/Infor";
 import Posts from "../../components/profile/Posts";
 
 const Profile = () => {
+  const { profile } = useSelector((state) => state);
+
   return (
     <div className="profile">
-      <Infor />
+      {profile.loading ? <Loading /> : <Infor />}
       <Posts />
     </div>
   );

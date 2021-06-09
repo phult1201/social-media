@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProfileUser } from "../../redux/actions/userAction";
+import EditProfile from "./EditProfile";
 
 const Infor = () => {
   const { id } = useParams();
@@ -9,6 +10,7 @@ const Infor = () => {
   const dispatch = useDispatch();
 
   const [userData, setUserData] = useState([]);
+  const [onEdit, setOnEdit] = useState(false);
 
   useEffect(() => {
     if (id === auth.user._id) {
@@ -35,20 +37,30 @@ const Infor = () => {
                   {user.firstname} {user.lastname}
                 </h2>
               </div>
-              <button className="infor_container-content-btn">
-                Edit Profile
-              </button>
+              {user._id === auth.user._id ? (
+                <button
+                  className="infor_container-content-btn"
+                  onClick={() => setOnEdit(true)}
+                >
+                  Edit Profile
+                </button>
+              ) : (
+                <button>Follow</button>
+              )}
               <div className="infor_container-content-follow">
                 <span>{user.followers.length}-followers </span>
                 <span>{user.following.length}-following </span>
               </div>
               <div className="infor_container-content-contact">
                 <h2>Contact me</h2>
+                <p>{user.address}</p>
                 <p>{user.email}</p>
                 <p>{user.mobile}</p>
                 <a href={user.website}>{user.website}</a>
               </div>
             </div>
+
+            {onEdit && <EditProfile setOnEdit={setOnEdit} />}
           </div>
         ))}
     </div>
