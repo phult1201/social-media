@@ -17,7 +17,7 @@
 
 .main {
   max-width: 1366px;
-  min-height: 100vh;
+  min-height: 100vw;
   margin: 0 auto;
   background-color: #fff;
 }
@@ -40,14 +40,16 @@ img {
 /* Auth */
 @import url("./styles/auth/auth.css");
 
-/* Loading */
-@import url("./styles/alert/loading.css");
-
 /* Header */
 @import url("./styles/header/header.css");
 
-/* Toast */
+/* Alert */
 @import url("./styles/alert/toast.css");
+@import url("./styles/alert/loading.css");
 
 /* Profile */
 @import url("./styles/profile/infor.css");
+@import url("./styles/profile/editprofile.css");
+
+/* Avatar */
+@import url("./styles/avatar/avatar.css");

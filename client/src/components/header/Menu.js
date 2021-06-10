@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { logout } from "../../redux/actions/authAction";
+import Avatar from "../avatar/Avatar";
 
 const Menu = () => {
   const navLinks = [
@@ -35,11 +36,9 @@ const Menu = () => {
         ))}
 
         <div className="menu_avatar" onClick={() => setShow(!show)}>
-          <img
-            className="menu_avatar-img"
-            src={auth.user.avatar}
-            alt="avatar"
-          />
+          <div style={{ cursor: "pointer" }}>
+            <Avatar avaImg={auth.user.avatar} avaSize="small" />
+          </div>
 
           {show && (
             <ul className="menu_avatar-list">
