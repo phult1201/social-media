@@ -1,4 +1,5 @@
 .edit-profile {
+  position: absolute;
   padding: 12px;
   background-color: #fff;
   flex-direction: column;
@@ -61,17 +62,35 @@
 .edit-profile_form-row input,
 .edit-profile_form-row textarea {
   outline: none;
-  font-size: 1.6rem;
-  padding: 2px 0;
-  border: 1px solid #4a4e69;
+  font-size: 1.4rem;
+  padding: 4px 0;
+  border: 1px solid #ccc;
+  text-indent: 4px;
 }
 
 .edit-profile_form-row textarea {
   resize: none;
 }
 
-.edit-profile_form-row--half {
-  width: 50%;
+.edit-profile_form-col {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-profile_form-col label {
+  font-size: 1.6rem;
+  color: #555;
+  margin-right: 5px;
+}
+
+.edit-profile_form-col input {
+  width: 100px;
+  outline: none;
+  font-size: 1.4rem;
+  padding: 4px 0;
+  border: 1px solid #ccc;
+  text-indent: 4px;
 }
 
 .edit-profile_form-save {

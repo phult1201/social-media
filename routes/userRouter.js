@@ -4,5 +4,6 @@ const userController = require("../controllers/userController");
 
 router.get("/search", authMiddleware, userController.searchUsers);
 router.get("/user/:id", authMiddleware, userController.getUser);
+router.patch("/user", authMiddleware, userController.updateUser);
 
 module.exports = router;

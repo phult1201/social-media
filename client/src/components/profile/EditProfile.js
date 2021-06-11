@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkImage } from "../../utils/imageUpload";
 import { GLOBALTYPES } from "../../redux/constant";
 import Avatar from "../avatar/Avatar";
+import { updateProfileUser } from "../../redux/actions/profileAction";
 
 const EditProfile = ({ setOnEdit }) => {
   const initialState = {
@@ -33,6 +34,11 @@ const EditProfile = ({ setOnEdit }) => {
     setUserData({ ...userData, [name]: value });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateProfileUser({ userData, avatar, auth }));
+  };
+
   useEffect(() => {
     setUserData(auth.user);
   }, [auth.user]);
@@ -50,7 +56,7 @@ const EditProfile = ({ setOnEdit }) => {
           </button>
         </div>
 
-        <form className="edit-profile_form">
+        <form className="edit-profile_form" onSubmit={handleSubmit}>
           <div className="edit-profile_form-avatar">
             <Avatar
               avaImg={avatar ? URL.createObjectURL(avatar) : auth.user.avatar}
@@ -61,7 +67,7 @@ const EditProfile = ({ setOnEdit }) => {
             />
           </div>
 
-          <div className="edit-profile_form-row">
+          <div className="edit-profile_form-col">
             <div className="">
               <label className="" htmlFor="firstname">
                 First name

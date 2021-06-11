@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getProfileUser } from "../../redux/actions/userAction";
+import { getProfileUser } from "../../redux/actions/profileAction";
 import EditProfile from "./EditProfile";
+import Avatar from "../avatar/Avatar";
 
 const Infor = () => {
   const { id } = useParams();
@@ -28,7 +29,7 @@ const Infor = () => {
         userData.map((user) => (
           <div className="infor_container" key={user._id}>
             <div className="infor_container-avatar">
-              <img src={user.avatar} alt="avatar" />
+              <Avatar avaImg={auth.user.avatar} avaSize="big" />
             </div>
 
             <div className="infor_container-content">
@@ -45,7 +46,7 @@ const Infor = () => {
                   Edit Profile
                 </button>
               ) : (
-                <button>Follow</button>
+                <button className="infor_container-content-btn">Follow</button>
               )}
               <div className="infor_container-content-follow">
                 <span>{user.followers.length}-followers </span>
