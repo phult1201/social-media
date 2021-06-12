@@ -1,11 +1,11 @@
 import React from "react";
+import Avatar from "../avatar/Avatar";
 
 const UserCard = ({ user }) => {
   return (
     <div className="card-user">
-      <img src={user.avatar} alt="avatar" className="card-user-img" />
+      <Avatar avaImg={user.avatar} avaSize="small" className="card-user-img" />
       <div className="card-user-info">
-        {/* <span className="d-block">{user.username}</span> */}
         <span>{user.firstname}</span>
         <span>{user.lastname}</span>
       </div>

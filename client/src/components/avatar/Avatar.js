@@ -1,8 +1,15 @@
 import React from "react";
 
-const Avatar = ({ avaSize, avaImg, avaEdit = false, name, onChange }) => {
+const Avatar = ({
+  avaSize,
+  avaImg,
+  avaEdit = false,
+  name,
+  onChange,
+  className = "avatar-className",
+}) => {
   return (
-    <div className="avatar">
+    <div className={`avatar ${className}`}>
       <div className="avatar-container">
         <img
           src={avaImg}

@@ -4,10 +4,20 @@ const userSchema = new mongoose.Schema(
   {
     firstname: { type: String, required: true, trim: true, maxLength: 25 },
     lastname: { type: String, required: true, trim: true, maxLength: 25 },
-    username: { type: String, required: true, trim: true, maxLength: 25, unique: true },
+    username: {
+      type: String,
+      required: true,
+      trim: true,
+      maxLength: 25,
+      unique: true,
+    },
     email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
-    avatar: { type: String, default: "" },
+    avatar: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/ltfu/image/upload/v1623478950/social-media/avatar/avatar_bxhsh0.jpg",
+    },
     role: { type: String, default: "user" },
     gender: { type: String, default: "male", enum: ["male", "female"] },
     mobile: { type: String, default: "" },

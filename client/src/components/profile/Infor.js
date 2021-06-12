@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProfileUser } from "../../redux/actions/profileAction";
+import Loading from "../alert/Loading";
 import EditProfile from "./EditProfile";
 import Avatar from "../avatar/Avatar";
+import Follow from "./follow/Follow";
 
 const Infor = () => {
   const { id } = useParams();
@@ -23,13 +25,15 @@ const Infor = () => {
     }
   }, [auth, id, dispatch, profile.users]);
 
+  if (!userData) return <Loading />;
+
   return (
     <div className="infor">
       {userData.length > 0 &&
         userData.map((user) => (
           <div className="infor_container" key={user._id}>
             <div className="infor_container-avatar">
-              <Avatar avaImg={auth.user.avatar} avaSize="big" />
+              <Avatar avaImg={user.avatar} avaSize="big" />
             </div>
 
             <div className="infor_container-content">
@@ -40,17 +44,17 @@ const Infor = () => {
               </div>
               {user._id === auth.user._id ? (
                 <button
-                  className="infor_container-content-btn"
+                  className="follow-btn follow-btn--false"
                   onClick={() => setOnEdit(true)}
                 >
                   Edit Profile
                 </button>
               ) : (
-                <button className="infor_container-content-btn">Follow</button>
+                <Follow user={user} />
               )}
               <div className="infor_container-content-follow">
-                <span>{user.followers.length}-followers </span>
-                <span>{user.following.length}-following </span>
+                <span>{user.followers.length} Followers </span>
+                <span>{user.following.length} Following </span>
               </div>
               <div className="infor_container-content-contact">
                 <h2>Contact me</h2>

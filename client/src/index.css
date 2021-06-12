@@ -28,9 +28,10 @@ ul {
 
 a {
   text-decoration: none;
+  color: #555;
 }
 a:visited {
-  color: inherit;
+  color: #555;
 }
 
 img {
@@ -50,6 +51,7 @@ img {
 /* Profile */
 @import url("./styles/profile/infor.css");
 @import url("./styles/profile/editprofile.css");
+@import url("./styles/profile/follow/follow.css");
 
 /* Avatar */
 @import url("./styles/avatar/avatar.css");

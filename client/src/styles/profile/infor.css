@@ -58,9 +58,8 @@
 }
 
 .infor_container-content-follow {
-  color: #5bc0de;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #293b5f;
+  text-transform: capitalize;
 }
 
 .infor_container-content-follow > span {

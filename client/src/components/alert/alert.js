@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GLOBALTYPES } from "../../redux/constant";
-import Loading from "./loading";
-import Toast from "./toast";
+import Loading from "./Loading";
+import Toast from "./Toast";
 
 const Notify = () => {
   const { alert } = useSelector((state) => state);
