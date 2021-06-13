@@ -1,10 +1,13 @@
 import React from "react";
 
-const Loading = () => {
+const Loading = ({ className = "className" }) => {
   return (
-    <div className="overlay">
-      <div className="water">
-        <div className="water-text">LOADING</div>
+    <div className={className}>
+      <div className="spinner_overlay">
+        <div className="spinner">
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
   );

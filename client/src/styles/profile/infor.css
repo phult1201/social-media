@@ -63,5 +63,14 @@
 }
 
 .infor_container-content-follow > span {
-  margin-right: 20px;
+  width: fit-content;
+}
+
+.infor_container-content-follow > span:nth-child(1) {
+  margin-right: 10px;
+}
+
+.infor_container-content-follow > span:hover {
+  border-bottom: 1px solid #293b5f;
+  cursor: pointer;
 }

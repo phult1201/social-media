@@ -56,8 +56,17 @@
       &-follow {
         color: #293b5f;
         text-transform: capitalize;
+
         & > span {
-          margin-right: 20px;
+          width: fit-content;
+
+          &:nth-child(1) {
+            margin-right: 10px;
+          }
+          &:hover {
+            border-bottom: 1px solid #293b5f;
+            cursor: pointer;
+          }
         }
       }
     }

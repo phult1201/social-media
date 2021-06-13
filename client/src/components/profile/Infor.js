@@ -5,12 +5,17 @@ import { getProfileUser } from "../../redux/actions/profileAction";
 import Loading from "../alert/Loading";
 import EditProfile from "./EditProfile";
 import Avatar from "../avatar/Avatar";
-import Follow from "./follow/Follow";
+import FollowBtn from "./follow/FollowBtn";
+import Followers from "./follow/Followers";
+import Following from "./follow/Following";
 
 const Infor = () => {
   const { id } = useParams();
   const { auth, profile } = useSelector((state) => state);
   const dispatch = useDispatch();
+
+  const [showFollowers, setShowFollowers] = useState(false);
+  const [showFollowing, setShowFollowing] = useState(false);
 
   const [userData, setUserData] = useState([]);
   const [onEdit, setOnEdit] = useState(false);
@@ -50,11 +55,15 @@ const Infor = () => {
                   Edit Profile
                 </button>
               ) : (
-                <Follow user={user} />
+                <FollowBtn user={user} />
               )}
               <div className="infor_container-content-follow">
-                <span>{user.followers.length} Followers </span>
-                <span>{user.following.length} Following </span>
+                <span onClick={() => setShowFollowers(true)}>
+                  {user.followers.length} Followers{" "}
+                </span>
+                <span onClick={() => setShowFollowing(true)}>
+                  {user.following.length} Following{" "}
+                </span>
               </div>
               <div className="infor_container-content-contact">
                 <h2>Contact me</h2>
@@ -66,6 +75,19 @@ const Infor = () => {
             </div>
 
             {onEdit && <EditProfile setOnEdit={setOnEdit} />}
+
+            {showFollowers && (
+              <Followers
+                users={user.followers}
+                setShowFollowers={setShowFollowers}
+              />
+            )}
+            {showFollowing && (
+              <Following
+                users={user.following}
+                setShowFollowing={setShowFollowing}
+              />
+            )}
           </div>
         ))}
     </div>

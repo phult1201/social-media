@@ -16,7 +16,9 @@ const userController = {
   },
   getUser: async (req, res) => {
     try {
-      const user = await Users.findById(req.params.id).select("-password");
+      const user = await Users.findById(req.params.id)
+        .select("-password")
+        .populate("followers following", "-password");
       if (!user) return res.status(400).json({ msg: "User dose not exists." });
       return res.status(200).json({ user });
     } catch (error) {
@@ -71,7 +73,7 @@ const userController = {
 
       await Users.findOneAndUpdate(
         { _id: req.user._id },
-        { $push: { followers: req.params.id } },
+        { $push: { following: req.params.id } },
         { new: true }
       );
 
@@ -90,7 +92,7 @@ const userController = {
 
       await Users.findOneAndUpdate(
         { _id: req.user._id },
-        { $pull: { followers: req.params.id } },
+        { $pull: { following: req.params.id } },
         { new: true }
       );
 

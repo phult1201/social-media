@@ -3,6 +3,7 @@
 }
 
 .avatar-container {
+  width: fit-content;
   border-radius: 50%;
   box-shadow: 1px 1px 24px #eee;
   position: relative;
@@ -46,6 +47,7 @@
 
 .avatar-edit_container {
   text-align: center;
+  width: fit-content;
 }
 
 .avatar-edit_container label {

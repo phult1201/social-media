@@ -1,25 +1,61 @@
-.follow-btn {
-  font-size: 1.6rem;
-  min-width: 120px;
-  padding: 4px 20px;
-  border-radius: 16px;
-  outline: none;
-  border: 1px solid;
-  transition: all 100ms ease-in;
-
-  &:hover {
-    transform: scale(1.1, 1.1);
+.follow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  min-width: 500px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  & > * {
+    display: inline-block;
   }
 
-  &--true {
-    color: #555;
-    border-color: rgba(248, 245, 241, 1);
-    background-color: rgba(248, 245, 241, 0.8);
+  &_header {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 0 10px;
+
+    &-title {
+      font-size: 1.6rem;
+      color: #555;
+    }
+
+    &-btn {
+      cursor: pointer;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      font-size: 1.6rem;
+      color: #555;
+      transition: transform 100ms ease;
+
+      &:hover {
+        transform: scale(1.1, 1.1);
+      }
+    }
   }
 
-  &--false {
-    color: #126e82;
-    border-color: rgba(130, 204, 221, 1);
-    background-color: rgba(130, 204, 221, 0.6);
+  &_body {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    min-height: 80px;
+
+    &-item {
+      .card-user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    & > div {
+      margin: 0 10px;
+    }
   }
 }

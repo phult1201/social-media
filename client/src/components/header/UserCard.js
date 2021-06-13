@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "../avatar/Avatar";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, children }) => {
   return (
     <div className="card-user">
       <Avatar avaImg={user.avatar} avaSize="small" className="card-user-img" />
@@ -9,6 +9,7 @@ const UserCard = ({ user }) => {
         <span>{user.firstname}</span>
         <span>{user.lastname}</span>
       </div>
+      {children}
     </div>
   );
 };

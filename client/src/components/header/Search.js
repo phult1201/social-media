@@ -15,7 +15,7 @@ const Search = () => {
   useEffect(() => {
     const timeOutId = setTimeout(() => {
       if (search) {
-        getDataAPI(`search?username=${search}`, auth.access_token)
+        getDataAPI(`/search?username=${search}`, auth.access_token)
           .then((res) => setUsers(res.data))
           .catch((error) => {
             dispatch({

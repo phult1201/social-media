@@ -1,0 +1,25 @@
+.follow-btn {
+  font-size: 1.6rem;
+  min-width: 120px;
+  padding: 4px 20px;
+  border-radius: 16px;
+  outline: none;
+  border: 1px solid;
+  transition: all 100ms ease-in;
+
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
+
+  &--true {
+    color: #555;
+    border-color: rgba(248, 245, 241, 1);
+    background-color: rgba(248, 245, 241, 0.8);
+  }
+
+  &--false {
+    color: #126e82;
+    border-color: rgba(130, 204, 221, 1);
+    background-color: rgba(130, 204, 221, 0.6);
+  }
+}

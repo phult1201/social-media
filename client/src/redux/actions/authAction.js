@@ -6,13 +6,13 @@ export const login = (data) => {
   return async (dispatch) => {
     try {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
-      const res = await postDataAPI("login", data);
-      dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } });
+      const res = await postDataAPI("/login", data);
       localStorage.setItem("firstLogin", true);
       dispatch({
         type: GLOBALTYPES.AUTH,
         payload: { access_token: res.data.access_token, user: res.data.user },
       });
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } });
     } catch (error) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -33,13 +33,16 @@ export const register = (data) => {
         });
 
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
-      const res = await postDataAPI("register", data);
+      const res = await postDataAPI("/register", data);
       dispatch({
         type: GLOBALTYPES.AUTH,
         payload: { access_token: res.data.access_token, user: res.data.user },
       });
       localStorage.setItem("firstLogin", true);
-      dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } });
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { success: res.data.msg },
+      });
     } catch (error) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -53,7 +56,7 @@ export const logout = () => {
   return async (dispatch) => {
     try {
       localStorage.removeItem("firstLogin");
-      await postDataAPI("logout");
+      await postDataAPI("/logout");
       window.location.href = "/";
     } catch (error) {
       dispatch({
@@ -70,7 +73,7 @@ export const refreshtoken = () => {
     if (firstLogin) {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
       try {
-        const res = await postDataAPI("refresh_token");
+        const res = await postDataAPI("/refresh_token");
         dispatch({
           type: GLOBALTYPES.AUTH,
           payload: { access_token: res.data.access_token, user: res.data.user },

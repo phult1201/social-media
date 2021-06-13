@@ -51,7 +51,11 @@ img {
 /* Profile */
 @import url("./styles/profile/infor.css");
 @import url("./styles/profile/editprofile.css");
+@import url("./styles/profile/follow/follow-btn.css");
 @import url("./styles/profile/follow/follow.css");
 
 /* Avatar */
 @import url("./styles/avatar/avatar.css");
+
+/* Overlay */
+@import url("./styles/overlay/overlay.css");

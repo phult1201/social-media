@@ -8,7 +8,10 @@ const Profile = () => {
   const { profile } = useSelector((state) => state);
 
   return (
-    <div className="profile">
+    <div
+      className="profile"
+      style={{ position: "relative", height: "calc(100vh - 70px)" }}
+    >
       {profile.loading ? <Loading /> : <Infor />}
       <Posts />
     </div>

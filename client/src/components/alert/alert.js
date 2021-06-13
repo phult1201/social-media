@@ -4,7 +4,7 @@ import { GLOBALTYPES } from "../../redux/constant";
 import Loading from "./Loading";
 import Toast from "./Toast";
 
-const Notify = () => {
+const Alert = () => {
   const { alert } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -48,4 +48,4 @@ const Notify = () => {
   );
 };
 
-export default Notify;
+export default Alert;
