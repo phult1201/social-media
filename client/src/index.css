@@ -14,12 +14,16 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.wrap_main {
+  width: 100%;
+  position: relative;
+}
 
 .main {
-  max-width: 1366px;
+  max-width: 90%;
   min-height: 100vh;
-  margin: 0 auto;
   background-color: #fff;
+  margin: 0 auto;
 }
 
 ul {

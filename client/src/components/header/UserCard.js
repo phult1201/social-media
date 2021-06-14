@@ -9,6 +9,7 @@ const UserCard = ({ user, children }) => {
         <span>{user.firstname}</span>
         <span>{user.lastname}</span>
       </div>
+
       {children}
     </div>
   );

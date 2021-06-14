@@ -3,6 +3,7 @@ import FollowBtn from "./FollowBtn";
 import { useSelector } from "react-redux";
 import UserCard from "../../header/UserCard";
 import Overlay from "../../overlay/Overlay";
+import { Link } from "react-router-dom";
 
 const Followers = ({ users, setShowFollowers }) => {
   const { auth } = useSelector((state) => state);
@@ -21,9 +22,13 @@ const Followers = ({ users, setShowFollowers }) => {
         <div className="follow_body">
           {users.map((user) => (
             <div key={user._id} className="follow_body-item">
-              <UserCard user={user}>
-                {auth.user._id !== user._id && <FollowBtn user={user} />}
-              </UserCard>
+              <Link
+                to={`/profile/${user._id}`}
+                onClick={() => setShowFollowers(false)}
+              >
+                <UserCard user={user} />
+              </Link>
+              {auth.user._id !== user._id && <FollowBtn user={user} />}
             </div>
           ))}
         </div>

@@ -33,12 +33,11 @@
   color: #555;
   background-color: #e5e5e5;
   cursor: pointer;
-  transition: background-color, color 200ms ease-in-out;
+  transition: transform 100ms ease-in-out;
 }
 
 .edit-profile_header-btn:hover {
-  background-color: rgba(85, 85, 85, 0.5);
-  color: #fff;
+  transform: scale(1.1, 1.1);
 }
 
 .edit-profile_form-avatar {

@@ -22,13 +22,19 @@ function App() {
     <Router>
       <Alert />
       <div className="App">
-        <div className="main">
-          {auth.access_token && <Header />}
-          <Route exact path="/" component={auth.access_token ? Home : Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/Login" component={Login} />
-          <PrivateRouter exact path="/:page" component={PageRender} />
-          <PrivateRouter exact path="/:page/:id" component={PageRender} />
+        {auth.access_token && <Header />}
+        <div className="wrap_main">
+          <div className="main">
+            <Route
+              exact
+              path="/"
+              component={auth.access_token ? Home : Login}
+            />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/Login" component={Login} />
+            <PrivateRouter exact path="/:page" component={PageRender} />
+            <PrivateRouter exact path="/:page/:id" component={PageRender} />
+          </div>
         </div>
       </div>
     </Router>

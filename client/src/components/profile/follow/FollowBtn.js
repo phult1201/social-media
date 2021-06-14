@@ -24,14 +24,16 @@ const FollowBtn = ({ user }) => {
 
   return (
     <>
-      {followed ? (
+      {followed && (
         <button
           className="follow-btn follow-btn--true"
           onClick={handleUnFollow}
         >
           Unfollow
         </button>
-      ) : (
+      )}
+
+      {!followed && (
         <button className="follow-btn follow-btn--false" onClick={handleFollow}>
           Follow
         </button>

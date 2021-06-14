@@ -1,12 +1,14 @@
 .follow {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  min-width: 500px;
+  min-width: 450px;
+  max-width: 600px;
   border: 1px solid #ccc;
   border-radius: 12px;
+  text-align: center;
 }
 
 .follow > * {
@@ -43,9 +45,15 @@
 
 .follow_body {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   margin: 10px;
   min-height: 80px;
+}
+
+.follow_body-item {
+  width: 120px;
 }
 
 .follow_body-item .card-user {

@@ -1,14 +1,16 @@
 .follow-btn {
   font-size: 1.6rem;
-  min-width: 120px;
+  width: 120px;
   padding: 4px 20px;
   border-radius: 16px;
   outline: none;
   border: 1px solid;
-  transition: all 100ms ease-in;
+  transition: transform 100ms ease-in;
+  background-color: transparent;
 }
 
 .follow-btn:hover {
+  cursor: pointer;
   transform: scale(1.1, 1.1);
 }
 
