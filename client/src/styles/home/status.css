@@ -1,0 +1,29 @@
+.status {
+  background-color: #fff;
+  box-shadow: 0 0 10px #ddd;
+  padding: 20px;
+  border-radius: 20px;
+  display: inline-flex;
+  min-width: 520px;
+  max-width: fit-content;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin: 10px 0;
+}
+
+.status-btn {
+  cursor: pointer;
+  outline: none;
+  margin-left: 5px;
+  border: 1px solid #f1f1f1;
+  border-radius: 20px;
+  background-color: #fafafa;
+  padding: 4px 8px;
+  flex-grow: 1;
+  color: #555;
+}
+
+.status-btn:hover {
+  background-color: #f1f1f1;
+}

@@ -9,9 +9,10 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import { refreshtoken } from "./redux/actions/authAction";
+import StatusModal from "./components/home/StatusModal";
 
 function App() {
-  const { auth } = useSelector((state) => state);
+  const { auth, status } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function App() {
       <div className="App">
         {auth.access_token && <Header />}
         <div className="wrap_main">
+          {status && <StatusModal />}
           <div className="main">
             <Route
               exact

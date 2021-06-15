@@ -7,4 +7,5 @@
   right: 0;
   left: 0;
   background-color: rgba(225, 232, 235, 0.8);
+  z-index: 99;
 }

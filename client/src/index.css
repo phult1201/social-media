@@ -63,3 +63,7 @@ img {
 
 /* Overlay */
 @import url("./styles/overlay/overlay.css");
+
+/* Home */
+@import url("./styles/home/status.css");
+@import url("./styles/home/status_modal.css");

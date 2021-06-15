@@ -5,12 +5,10 @@ const initialState = {};
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case GLOBALTYPES.AUTH:
-      state = { ...state, ...action.payload };
-      break;
+      return { ...state, ...action.payload };
     default:
       return state;
   }
-  return state;
 };
 
 export default authReducer;
