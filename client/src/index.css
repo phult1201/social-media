@@ -67,3 +67,5 @@ img {
 /* Home */
 @import url("./styles/home/status.css");
 @import url("./styles/home/status_modal.css");
+@import url("./styles/home/posts.css");
+@import url("./styles/home/post_card/card_header.css");

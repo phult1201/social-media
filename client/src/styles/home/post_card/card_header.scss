@@ -1,0 +1,31 @@
+.card_header {
+  display: flex;
+  justify-content: space-between;
+  height: fit-content;
+  align-items: center;
+  color: #555;
+
+  &-left {
+    width: fit-content;
+    height: fit-content;
+    div {
+      display: inline-block;
+    }
+  }
+
+  &-right {
+    position: relative;
+
+    .dropdown-post {
+      background-color: #f1f1f1;
+      border-radius: 4px;
+      min-width: 140px;
+      position: absolute;
+      right: 0;
+
+      &-item {
+        padding: 8px 10px;
+      }
+    }
+  }
+}

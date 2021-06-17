@@ -16,6 +16,7 @@ app.use(morgan("tiny"));
 // Routes
 app.use("/api", require("./routes/authRouter"));
 app.use("/api", require("./routes/userRouter"));
+app.use("/api", require("./routes/postRouter"));
 
 // Connect to server
 mongoose

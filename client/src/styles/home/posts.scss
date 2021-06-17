@@ -1,0 +1,15 @@
+.posts {
+  font-size: 1.6rem;
+  position: relative;
+  max-width: 600px;
+  left: calc(50% - 300px);
+
+  &-item {
+    margin-bottom: 12px;
+    min-height: 400px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 12px #dfdfdf;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GLOBALTYPES } from "../../redux/constant";
+import { createPost } from "../../redux/actions/postAction";
 import Overlay from "../overlay/Overlay";
 
 const StatusModal = () => {
@@ -76,10 +77,26 @@ const StatusModal = () => {
     setImages([...images, { camera: URL }]);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!images.length)
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "Please add your photo" },
+      });
+
+    dispatch(createPost({ content, images, auth }));
+
+    setContent("");
+    setImages([]);
+    if (tracks) tracks.stop();
+    dispatch({ type: GLOBALTYPES.STATUS, payload: false });
+  };
+
   return (
     <Overlay>
       <div className="status_modal">
-        <form className="status_modal-form">
+        <form className="status_modal-form" onSubmit={handleSubmit}>
           <div className="status_modal-form-header">
             <h5>Create Post</h5>
             <i

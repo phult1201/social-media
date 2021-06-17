@@ -11,6 +11,12 @@ export const PROFILE_TYPES = {
   UNFOLLOW: "UNFOLLOW",
 };
 
+export const POST_TYPES = {
+  LOADING_POST: "LOADING_POST",
+  CREATE_POST: "CREATE_POST",
+  GET_POSTS: "GET_POSTS",
+};
+
 export const EditData = (data, id, post) => {
   const newData = data.map((item) => (item._id === id ? post : item));
   return newData;
