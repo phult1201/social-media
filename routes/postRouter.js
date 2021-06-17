@@ -7,4 +7,6 @@ router
   .get(authMiddleware, postController.getPost)
   .post(authMiddleware, postController.createPost);
 
+router.route("/post/:id").patch(authMiddleware, postController.updatePost);
+
 module.exports = router;

@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GLOBALTYPES } from "../../redux/constant";
-import { createPost } from "../../redux/actions/postAction";
+import { createPost, updatePost } from "../../redux/actions/postAction";
 import Overlay from "../overlay/Overlay";
 
 const StatusModal = () => {
-  const { auth } = useSelector((state) => state);
+  const { auth, status } = useSelector((state) => state);
 
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
@@ -85,13 +85,24 @@ const StatusModal = () => {
         payload: { error: "Please add your photo" },
       });
 
-    dispatch(createPost({ content, images, auth }));
+    if (status.onEdit) {
+      dispatch(updatePost({ content, images, auth, status }));
+    } else {
+      dispatch(createPost({ content, images, auth }));
+    }
 
     setContent("");
     setImages([]);
     if (tracks) tracks.stop();
     dispatch({ type: GLOBALTYPES.STATUS, payload: false });
   };
+
+  useEffect(() => {
+    if (status.onEdit) {
+      setContent(status.content);
+      setImages(status.images);
+    }
+  }, []);
 
   return (
     <Overlay>
@@ -119,7 +130,11 @@ const StatusModal = () => {
                 <div key={index} className="show_images-box">
                   <img
                     src={
-                      image.camera ? image.camera : URL.createObjectURL(image)
+                      image.camera
+                        ? image.camera
+                        : image.url
+                        ? image.url
+                        : URL.createObjectURL(image)
                     }
                     alt="images"
                   />

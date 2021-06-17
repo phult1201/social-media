@@ -1,4 +1,5 @@
 import { POST_TYPES } from "../constant";
+import { EditData } from "../constant";
 
 const initialState = {
   loading: false,
@@ -18,7 +19,12 @@ const postReducer = (state = initialState, action) => {
         result: action.payload.posts,
       };
     case POST_TYPES.CREATE_POST:
-      return { ...state, posts: [...state.posts, action.payload] };
+      return { ...state, posts: [action.payload, ...state.posts] };
+    case POST_TYPES.UPDATE_POST:
+      return {
+        ...state,
+        posts: EditData(state.posts, action.payload._id, action.payload),
+      };
     default:
       return state;
   }
