@@ -73,3 +73,38 @@ export const getPosts = (access_token) => {
     }
   };
 };
+
+export const likePost = ({ post, auth }) => {
+  return async (dispatch) => {
+    const newPost = { ...post, likes: [...post.likes, auth.user] };
+    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+
+    try {
+      await patchDataAPI(`/post/${post._id}/like`, null, auth.access_token);
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};
+
+export const unLikePost = ({ post, auth }) => {
+  return async (dispatch) => {
+    const newPost = {
+      ...post,
+      likes: post.likes.filter((like) => like._id !== auth.user._id),
+    };
+
+    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+    try {
+      await patchDataAPI(`/post/${post._id}/unlike`, null, auth.access_token);
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};

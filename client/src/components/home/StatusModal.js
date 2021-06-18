@@ -102,7 +102,7 @@ const StatusModal = () => {
       setContent(status.content);
       setImages(status.images);
     }
-  }, []);
+  }, [status.content, status.onEdit, status.images]);
 
   return (
     <Overlay>

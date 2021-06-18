@@ -5,18 +5,22 @@ const CardBody = ({ post }) => {
   const [readMore, setReadMore] = useState(false);
 
   return (
-    <div className="card_boody">
+    <div className="card_body">
       <div className="card_body-content">
         <span>
           {post.content.length < 60
             ? post.content
             : readMore
             ? post.content + " "
-            : post.content.slice(0, 60) + "..."}
+            : post.content.slice(0, 60) + " ..."}
         </span>
         {post.content.length > 60 && (
-          <span className="read-more" onClick={() => setReadMore(!readMore)}>
-            {readMore ? "Hide content" : "Read more"}
+          <span
+            style={{ color: "#325288", cursor: "pointer" }}
+            className="read-more"
+            onClick={() => setReadMore(!readMore)}
+          >
+            {readMore ? "Hiden" : "Read more"}
           </span>
         )}
       </div>

@@ -1,0 +1,58 @@
+.carousel {
+  width: fit-content;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel:hover > .carousel-arrow {
+  display: block;
+}
+
+.carousel-arrow {
+  background-color: rgba(155, 155, 155, 0.2);
+  height: 100%;
+  position: absolute;
+  font-size: 3rem;
+  color: #555;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+  padding: 0 15px;
+  display: none;
+}
+
+.carousel-arrow i {
+  position: relative;
+  top: 50%;
+  transform: -50%, -50%;
+}
+
+.carousel-arrow--left {
+  left: 0;
+}
+
+.carousel-arrow--right {
+  right: 0;
+}
+
+.carousel .slide {
+  margin-bottom: 0;
+  opacity: 0;
+  transition-duration: 500ms ease;
+}
+
+.carousel .slide.active {
+  opacity: 1;
+  transition-duration: 500ms;
+}
+
+.carousel .slide img {
+  margin-bottom: 0;
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}

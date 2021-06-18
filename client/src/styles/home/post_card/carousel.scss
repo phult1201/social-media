@@ -1,0 +1,59 @@
+.carousel {
+  width: fit-content;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  &:hover > &-arrow {
+    display: block;
+  }
+
+  &-arrow {
+    background-color: rgba(155, 155, 155, 0.2);
+    height: 100%;
+    position: absolute;
+    font-size: 3rem;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+    padding: 0 15px;
+    display: none;
+
+    i {
+      position: relative;
+      top: 50%;
+      transform: (-50%, -50%);
+    }
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
+    }
+  }
+
+  .slide {
+    margin-bottom: 0;
+    opacity: 0;
+    transition-duration: 500ms ease;
+
+    &.active {
+      opacity: 1;
+      transition-duration: 500ms;
+    }
+
+    img {
+      margin-bottom: 0;
+      width: 100%;
+      max-height: 500px;
+      // background-size: cover;
+      object-fit: contain;
+    }
+  }
+}

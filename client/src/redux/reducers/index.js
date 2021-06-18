@@ -4,6 +4,7 @@ import alert from "./alertReducer";
 import profile from "./profileReducer";
 import status from "./statusReducer";
 import homePosts from "./postReducer";
+import modal from "./modalReducer";
 
 const rootReducer = combineReducers({
   auth,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   profile,
   status,
   homePosts,
+  modal,
 });
 
 export default rootReducer;

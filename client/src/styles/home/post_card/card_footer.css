@@ -1,0 +1,26 @@
+.card_footer {
+  color: rgba(74, 78, 105, 0.8);
+}
+
+.card_footer-icon {
+  font-size: 2.4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card_footer-icon .fa-heart,
+.card_footer-icon .fa-comment,
+.card_footer-icon .fa-paper-plane {
+  margin-right: 10px;
+}
+
+.card_footer-count {
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card_footer-count span {
+  vertical-align: middle;
+}

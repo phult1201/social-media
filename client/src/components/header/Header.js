@@ -8,7 +8,7 @@ const Header = () => {
     <div className="header">
       <nav className="header_nav">
         <Link to="/" className="header_logo">
-          Social - Network
+          <h4 onClick={() => window.scrollTo({ top: 0 })}>Social - Network</h4>
         </Link>
         <Search />
         <Menu />

@@ -1,10 +1,10 @@
 .status_modal {
-  position: absolute;
+  position: sticky;
   background-color: #fff;
   border-radius: 20px;
   min-width: 480px;
   max-width: 480px;
-  top: 0;
+  top: 15%;
   z-index: 100;
   left: calc(50% - 480px / 2);
 

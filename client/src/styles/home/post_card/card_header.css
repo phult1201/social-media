@@ -1,32 +1,45 @@
 .card_header {
   display: flex;
   justify-content: space-between;
-  height: fit-content;
   align-items: center;
   color: #555;
 }
 
 .card_header-left {
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
 }
 
 .card_header-left div {
+  vertical-align: middle;
   display: inline-block;
+  margin-right: 4px;
+  font-size: 1.8rem;
 }
 
 .card_header-right {
   position: relative;
 }
 
+.card_header-right i {
+  cursor: pointer;
+}
+
 .card_header-right .dropdown-post {
-  background-color: #f1f1f1;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #fafafa;
   border-radius: 4px;
   min-width: 140px;
   position: absolute;
   right: 0;
+  z-index: 20;
 }
 
 .card_header-right .dropdown-post-item {
   padding: 8px 10px;
+}
+
+.card_header-right .dropdown-post-item:hover {
+  background-color: #f1f1f1;
 }

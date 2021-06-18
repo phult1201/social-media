@@ -21,7 +21,8 @@
 
 .main {
   max-width: 90%;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
+
   background-color: #fff;
   margin: 0 auto;
 }
@@ -69,3 +70,6 @@ img {
 @import url("./styles/home/status_modal.css");
 @import url("./styles/home/posts.css");
 @import url("./styles/home/post_card/card_header.css");
+@import url("./styles/home/post_card/card_body.css");
+@import url("./styles/home/post_card/card_footer.css");
+@import url("./styles/home/post_card/carousel.css");

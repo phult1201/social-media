@@ -1,7 +1,12 @@
 .header {
-  max-width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
   border-bottom: 0.1px solid #eee;
   color: #4a4e69;
+  background-color: #fff;
+  z-index: 1000;
 }
 
 .header_logo {
