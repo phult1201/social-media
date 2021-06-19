@@ -44,13 +44,11 @@ const authController = {
         if (error)
           return res.status(400).json({ error, msg: "Can't save to database" });
       });
-      return res
-        .status(201)
-        .json({
-          msg: "Register success",
-          access_token,
-          user: { ...newUser, password: "" },
-        });
+      return res.status(201).json({
+        msg: "Register success",
+        access_token,
+        user: { ...newUser, password: "" },
+      });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -61,7 +59,7 @@ const authController = {
       Users.findOne({ email })
         .populate("followers following", "-password")
         .exec(async (error, user) => {
-          if (error) return res.status(400).json({ msg: "Something wrong." });
+          if (error) return res.status(400).json({ msg: error });
           if (!user)
             return res.status(401).json({ msg: "Email doesn't exists." });
 
@@ -85,7 +83,6 @@ const authController = {
       return res.status(500).json({ msg: error.message });
     }
   },
-
   logout: async (req, res) => {
     try {
       res.clearCookie("refreshtoken", { path: "/api/refresh_token" });

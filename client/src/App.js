@@ -38,7 +38,7 @@ function App() {
               component={auth.access_token ? Home : Login}
             />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/Login" component={Login} />
+            <Route exact path="/login" component={Login} />
             <PrivateRouter exact path="/:page" component={PageRender} />
             <PrivateRouter exact path="/:page/:id" component={PageRender} />
           </div>

@@ -78,7 +78,7 @@ export const refreshtoken = () => {
           type: GLOBALTYPES.AUTH,
           payload: { access_token: res.data.access_token, user: res.data.user },
         });
-        dispatch({ type: GLOBALTYPES.ALERT, payload: {} });
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } });
       } catch (error) {
         dispatch({
           type: GLOBALTYPES.ALERT,

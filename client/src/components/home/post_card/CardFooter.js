@@ -45,7 +45,7 @@ const CardFooter = ({ post }) => {
           <Link to={`/post/${post._id}`}>
             <i className="far fa-comment" />
           </Link>
-          <i className="fas fa-paper-plane"></i>
+          <i className="far fa-paper-plane"></i>
         </div>
         <i className="far fa-bookmark" />
       </div>
