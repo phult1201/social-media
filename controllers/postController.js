@@ -39,7 +39,12 @@ const postController = {
           content,
           images,
         }
-      ).populate("user likes", "avatar username firstname lastname");
+      )
+        .populate("user likes", "avatar username firstname lastname")
+        .populate({
+          path: "comments",
+          populate: { path: "user likes", select: "-password" },
+        });
 
       res.status(200).json({
         msg: "Update success",
