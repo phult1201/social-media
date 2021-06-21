@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { likePost, unLikePost } from "../../../redux/actions/postAction";
-import LikeButton from "./LikeButton";
+import LikeButton from "../LikeButton";
 
 const CardFooter = ({ post }) => {
   const [isLike, setIsLike] = useState(false);

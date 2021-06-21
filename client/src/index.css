@@ -73,3 +73,6 @@ img {
 @import url("./styles/home/post_card/card_body.css");
 @import url("./styles/home/post_card/card_footer.css");
 @import url("./styles/home/post_card/carousel.css");
+
+@import url("./styles/home/comment_card/comment_card.css");
+@import url("./styles/home/comment_card/input_comment.css");

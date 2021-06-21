@@ -26,9 +26,11 @@
 }
 
 .card_header-right .dropdown-post {
+  border: 1px solid #f1f1f1;
+  font-size: 1.4rem;
   overflow: hidden;
   cursor: pointer;
-  background-color: #fafafa;
+  background-color: #fff;
   border-radius: 4px;
   min-width: 140px;
   position: absolute;
@@ -38,6 +40,10 @@
 
 .card_header-right .dropdown-post-item {
   padding: 8px 10px;
+}
+
+.card_header-right .dropdown-post-item i {
+  margin-right: 4px;
 }
 
 .card_header-right .dropdown-post-item:hover {

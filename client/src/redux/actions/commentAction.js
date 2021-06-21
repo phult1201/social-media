@@ -10,7 +10,10 @@ export const createComment = (post, newComment, auth) => {
     try {
       const data = { ...newComment, postId: post._id };
       const res = await postDataAPI("/comment", data, auth.access_token);
-      console.log(res);
+
+      const newData = { ...res.data.newComment, user: auth.user };
+      const newPost = { ...post, comments: [...post.comments, newData] };
+      dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
     } catch (error) {
       return dispatch({
         type: GLOBALTYPES.ALERT,
@@ -18,4 +21,8 @@ export const createComment = (post, newComment, auth) => {
       });
     }
   };
+};
+
+export const updateComment = () => {
+  return async (dispatch) => {};
 };

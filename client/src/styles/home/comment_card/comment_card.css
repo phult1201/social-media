@@ -1,0 +1,84 @@
+.comment-card {
+  margin-bottom: 20px;
+}
+
+.comment-card_avatar a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.comment-card_avatar a span {
+  margin-left: 4px;
+  font-size: 1.4rem;
+}
+
+.comment-card_content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+.comment-card_content--left {
+  flex-grow: 1;
+}
+
+.comment-card_content--left .text-content .text {
+  letter-spacing: 0.5px;
+  font-size: 1.4rem;
+}
+
+.comment-card_content--left .text-content .read-more {
+  cursor: pointer;
+  color: crimson;
+}
+
+.comment-card_content--left .small-content .likes,
+.comment-card_content--left .small-content .reply {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.comment-card_content--left .small-content .moment {
+  color: #555;
+}
+
+.comment-card_content--right {
+  min-width: fit-content;
+}
+
+.comment-card_content--right .comment-menu {
+  color: #555;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+}
+
+.comment-card_content--right .comment-menu_dot {
+  cursor: pointer;
+}
+
+.comment-card_content--right .comment-menu_action {
+  right: 0;
+  font-size: 1.4rem;
+  background-color: #fafafa;
+  position: absolute;
+  width: 120px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.comment-card_content--right .comment-menu_action i {
+  cursor: pointer;
+  padding: 10px;
+  display: block;
+}
+
+.comment-card_content--right .comment-menu_action i:hover {
+  background-color: #f1f1f1;
+}

@@ -35,6 +35,12 @@
   object-fit: cover;
 }
 
+.avatar-img--very-small {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
 .avatar-edit {
   background-color: rgba(32, 44, 80, 0.5);
   width: 100%;

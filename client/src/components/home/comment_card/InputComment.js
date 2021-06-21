@@ -32,7 +32,9 @@ const InputComment = ({ children, post }) => {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <button type="submit">Send</button>
+        <button type="submit">
+          <i className="fas fa-feather-alt"></i>
+        </button>
       </form>
     </div>
   );

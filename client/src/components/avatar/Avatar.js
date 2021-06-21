@@ -7,9 +7,10 @@ const Avatar = ({
   name,
   onChange,
   className = "avatar-className",
+  style,
 }) => {
   return (
-    <div className={`avatar ${className}`}>
+    <div className={`avatar ${className}`} style={{ ...style }}>
       <div className="avatar-container">
         <img
           src={avaImg}

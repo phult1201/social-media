@@ -46,13 +46,13 @@ const CardHeader = ({ post }) => {
                   </div>
 
                   <div className="dropdown-post-item">
-                    <i className="fas fa-trash"></i>
+                    <i className="far fa-trash-alt"></i>
                     <span>Delete Post</span>
                   </div>
                 </>
               )}
               <div className="dropdown-post-item">
-                <i className="fas fa-copy"></i>
+                <i className="far fa-copy"></i>
                 <span>Coppy</span>
               </div>
             </div>

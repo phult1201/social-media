@@ -29,6 +29,11 @@
       height: 40px;
       object-fit: cover;
     }
+    &--very-small {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+    }
   }
 
   &-edit {
