@@ -5,32 +5,55 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import LikeButton from "../LikeButton";
 import CommentMenu from "./CommentMenu";
-import { updateComment } from "../../../redux/actions/commentAction";
+import {
+  likeComment,
+  updateComment,
+  unLikeComment,
+} from "../../../redux/actions/commentAction";
 
 const CommentCard = ({ post, comment }) => {
   const dispatch = useDispatch();
+
   const [content, setContent] = useState("");
   const [showRight, setShowRight] = useState(0);
   const [readMore, setReadMore] = useState(false);
+  const [loadLike, setLoadLike] = useState(false);
+  const [isLike, setIsLike] = useState(false);
   const [onEdit, setOnEdit] = useState(false);
+
   const { auth } = useSelector((state) => state);
 
   useEffect(() => {
     setContent(comment.content);
-  }, [comment]);
+    if (comment.likes.find((like) => like._id === auth.user._id)) {
+      setIsLike(true);
+    }
+  }, [comment, auth.user._id]);
 
   const styleCard = {
     opacity: comment._id ? 1 : 0.5,
     pointerEvents: comment._id ? "inherit" : "none",
   };
 
-  const handleLike = async () => {};
+  const handleLike = async () => {
+    if (loadLike) return;
+    setIsLike(true);
+    setLoadLike(true);
+    await dispatch(likeComment({ comment, post, auth }));
+    setLoadLike(false);
+  };
 
-  const handleUnLike = async () => {};
+  const handleUnLike = async () => {
+    if (loadLike) return;
+    setIsLike(false);
+    setLoadLike(true);
+    await dispatch(unLikeComment({ comment, post, auth }));
+    setLoadLike(false);
+  };
 
   const handleUpdate = () => {
     if (comment.content !== content) {
-      dispatch(updateComment({ comment, post, content, auth }));
+      dispatch(updateComment({ comment, post, newContent: content, auth }));
       setOnEdit(false);
     } else {
       setOnEdit(false);
@@ -126,7 +149,11 @@ const CommentCard = ({ post, comment }) => {
           className="comment-card_content--right"
           style={{ opacity: `${showRight}` }}
         >
-          <LikeButton handleLike={handleLike} handleUnLike={handleUnLike} />
+          <LikeButton
+            isLike={isLike}
+            handleLike={handleLike}
+            handleUnLike={handleUnLike}
+          />
           <CommentMenu
             post={post}
             comment={comment}

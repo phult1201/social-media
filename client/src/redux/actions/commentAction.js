@@ -1,5 +1,5 @@
-import { GLOBALTYPES, POST_TYPES } from "../constant";
-import { postDataAPI } from "../../utils/fetchData";
+import { EditData, DeleteData, GLOBALTYPES, POST_TYPES } from "../constant";
+import { patchDataAPI, postDataAPI } from "../../utils/fetchData";
 
 export const createComment = (post, newComment, auth) => {
   return async (dispatch) => {
@@ -23,6 +23,71 @@ export const createComment = (post, newComment, auth) => {
   };
 };
 
-export const updateComment = () => {
-  return async (dispatch) => {};
+export const updateComment = ({ comment, post, newContent, auth }) => {
+  return async (dispatch) => {
+    const newComment = EditData(post.comments, comment._id, {
+      ...comment,
+      content: newContent,
+    });
+    const newPost = { ...post, comments: newComment };
+    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+
+    try {
+      await patchDataAPI(
+        `/comment/${comment._id}`,
+        { content: newContent },
+        auth.access_token
+      );
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};
+
+export const likeComment = ({ comment, post, auth }) => {
+  return async (dispatch) => {
+    const newComment = { ...comment, likes: [...comment.likes, auth.user] };
+    const newComments = EditData(post.comments, comment._id, newComment);
+    const newPost = { ...post, comments: newComments };
+    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+    try {
+      await patchDataAPI(
+        `/comment/${comment._id}/like`,
+        null,
+        auth.access_token
+      );
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};
+
+export const unLikeComment = ({ comment, post, auth }) => {
+  return async (dispatch) => {
+    const newComment = {
+      ...comment,
+      likes: DeleteData(comment.likes, auth.user._id),
+    };
+    const newComments = EditData(post.comments, comment._id, newComment);
+    const newPost = { ...post, comments: newComments };
+    dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+    try {
+      await patchDataAPI(
+        `/comment/${comment._id}/unlike`,
+        null,
+        auth.access_token
+      );
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
 };
