@@ -40,6 +40,7 @@
 .comment-card_content--left .small-content .reply {
   font-weight: 600;
   margin-right: 8px;
+  cursor: pointer;
 }
 
 .comment-card_content--left .small-content .moment {

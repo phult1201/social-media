@@ -10,8 +10,9 @@ import {
   updateComment,
   unLikeComment,
 } from "../../../redux/actions/commentAction";
+import InputComment from "./InputComment";
 
-const CommentCard = ({ post, comment }) => {
+const CommentCard = ({ post, comment, commentId, children }) => {
   const dispatch = useDispatch();
 
   const [content, setContent] = useState("");
@@ -20,6 +21,7 @@ const CommentCard = ({ post, comment }) => {
   const [loadLike, setLoadLike] = useState(false);
   const [isLike, setIsLike] = useState(false);
   const [onEdit, setOnEdit] = useState(false);
+  const [onReply, setOnReply] = useState(false);
 
   const { auth } = useSelector((state) => state);
 
@@ -33,6 +35,11 @@ const CommentCard = ({ post, comment }) => {
   const styleCard = {
     opacity: comment._id ? 1 : 0.5,
     pointerEvents: comment._id ? "inherit" : "none",
+  };
+
+  const handleReply = async () => {
+    if (onReply) return setOnReply(false);
+    setOnReply({ ...comment, commentId });
   };
 
   const handleLike = async () => {
@@ -97,6 +104,11 @@ const CommentCard = ({ post, comment }) => {
               />
             ) : (
               <>
+                {comment.tag && comment.tag._id !== comment.user._id && (
+                  <Link to={`/profile/${comment.tag._id}`}>
+                    @{comment.tag.lastname} {comment.tag.firstname}
+                  </Link>
+                )}
                 <span className="text">
                   {content.length < 100
                     ? content
@@ -118,25 +130,19 @@ const CommentCard = ({ post, comment }) => {
           <div className="small-content">
             {onEdit ? (
               <>
-                <small
-                  className="likes"
-                  style={{ cursor: "pointer" }}
-                  onClick={handleUpdate}
-                >
+                <small className="likes" onClick={handleUpdate}>
                   Update
                 </small>
-                <small
-                  className="reply"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setOnEdit(false)}
-                >
+                <small className="reply" onClick={() => setOnEdit(false)}>
                   Cancel
                 </small>
               </>
             ) : (
               <>
                 <small className="likes">{comment.likes.length} Likes</small>
-                <small className="reply">Reply</small>
+                <small className="reply" onClick={handleReply}>
+                  {onReply ? "Cancel" : "Reply"}
+                </small>
               </>
             )}
             <small className="moment">
@@ -162,6 +168,20 @@ const CommentCard = ({ post, comment }) => {
           />
         </div>
       </div>
+      {onReply && (
+        <div style={{ marginTop: "10px", fontSize: "1.4rem" }}>
+          <InputComment post={post} onReply={onReply} setOnReply={setOnReply}>
+            <Link
+              to={`/profile/${onReply.user._id}`}
+              style={{ color: "#39A2DB" }}
+            >
+              {" "}
+              @{onReply.user.firstname} {onReply.user.lastname}
+            </Link>
+          </InputComment>
+        </div>
+      )}
+      {children}
     </div>
   );
 };
