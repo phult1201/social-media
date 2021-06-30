@@ -7,7 +7,7 @@ const LikeButton = ({ isLike, handleLike, handleUnLike }) => {
         <i
           className="fas fa-heart"
           onClick={handleUnLike}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", color: "#FF616D" }}
         ></i>
       ) : (
         <i

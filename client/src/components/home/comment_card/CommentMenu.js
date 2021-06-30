@@ -1,8 +1,18 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteComment } from "../../../redux/actions/commentAction";
 import OutsideAlerter from "../../custom_components/OutsideAlerter";
 
-const CommentMenu = ({ post, comment, auth, setOnEdit }) => {
+const CommentMenu = ({ post, comment, setOnEdit }) => {
+  const { auth } = useSelector((state) => state);
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleRemove = () => {
+    if (post.user._id === auth.user._id || comment.user._id === auth.user._id) {
+      dispatch(deleteComment({ post, auth, comment }));
+    }
+  };
 
   const MenuItem = () => {
     return (
@@ -17,7 +27,16 @@ const CommentMenu = ({ post, comment, auth, setOnEdit }) => {
           {" "}
           Edit
         </i>
-        <i className="far fa-trash-alt"> Remove</i>
+        <i
+          className="far fa-trash-alt"
+          onClick={() => {
+            handleRemove();
+            setShow(false);
+          }}
+        >
+          {" "}
+          Remove
+        </i>
       </>
     );
   };
@@ -38,7 +57,16 @@ const CommentMenu = ({ post, comment, auth, setOnEdit }) => {
                   comment.user._id === auth.user._id ? (
                     MenuItem()
                   ) : (
-                    <i className="far fa-trash-alt"> Remove</i>
+                    <i
+                      className="far fa-trash-alt"
+                      onClick={() => {
+                        handleRemove();
+                        setShow(false);
+                      }}
+                    >
+                      {" "}
+                      Remove
+                    </i>
                   )
                 ) : (
                   comment.user._id === auth.user._id && MenuItem()

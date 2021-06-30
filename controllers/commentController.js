@@ -4,13 +4,15 @@ const Posts = require("../models/postModel");
 const commentController = {
   createComment: async (req, res) => {
     try {
-      const { postId, content, tag, reply } = req.body;
+      const { postId, content, tag, reply, postUserId } = req.body;
 
       const newComment = new Comments({
         user: req.user._id,
         content,
         tag,
         reply,
+        postUserId,
+        postId,
       });
 
       await newComment.save();
@@ -26,7 +28,21 @@ const commentController = {
       return res.status(500).json({ msg: error.message });
     }
   },
-
+  deleteComment: async (req, res) => {
+    try {
+      const comment = await Comments.findOneAndDelete({
+        _id: req.params.id,
+        $or: [{ user: req.user._id }, { postUserId: req.user._id }],
+      });
+      await Posts.findOneAndUpdate(
+        { _id: comment.postId },
+        { $pull: { comments: req.params.id } }
+      );
+      return res.status(200).json({ msg: "Deleted success" });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
   updateComment: async (req, res) => {
     try {
       const { content } = req.body;

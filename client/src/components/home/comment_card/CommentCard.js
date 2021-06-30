@@ -16,7 +16,6 @@ const CommentCard = ({ post, comment, commentId, children }) => {
   const dispatch = useDispatch();
 
   const [content, setContent] = useState("");
-  const [showRight, setShowRight] = useState(0);
   const [readMore, setReadMore] = useState(false);
   const [loadLike, setLoadLike] = useState(false);
   const [isLike, setIsLike] = useState(false);
@@ -27,6 +26,8 @@ const CommentCard = ({ post, comment, commentId, children }) => {
 
   useEffect(() => {
     setContent(comment.content);
+    setOnReply(false);
+    setIsLike(false);
     if (comment.likes.find((like) => like._id === auth.user._id)) {
       setIsLike(true);
     }
@@ -81,12 +82,7 @@ const CommentCard = ({ post, comment, commentId, children }) => {
           </span>
         </Link>
       </div>
-      <div
-        className="comment-card_content"
-        style={{}}
-        onMouseEnter={() => setShowRight(1)}
-        onMouseLeave={() => setShowRight(0)}
-      >
+      <div className="comment-card_content" style={{}}>
         <div className="comment-card_content--left">
           <div className="text-content">
             {onEdit ? (
@@ -105,8 +101,11 @@ const CommentCard = ({ post, comment, commentId, children }) => {
             ) : (
               <>
                 {comment.tag && comment.tag._id !== comment.user._id && (
-                  <Link to={`/profile/${comment.tag._id}`}>
-                    @{comment.tag.lastname} {comment.tag.firstname}
+                  <Link
+                    to={`/profile/${comment.tag._id}`}
+                    style={{ color: "#39A2DB" }}
+                  >
+                    @{comment.tag.lastname} {comment.tag.firstname}{" "}
                   </Link>
                 )}
                 <span className="text">
@@ -151,21 +150,13 @@ const CommentCard = ({ post, comment, commentId, children }) => {
           </div>
         </div>
 
-        <div
-          className="comment-card_content--right"
-          style={{ opacity: `${showRight}` }}
-        >
+        <div className="comment-card_content--right">
           <LikeButton
             isLike={isLike}
             handleLike={handleLike}
             handleUnLike={handleUnLike}
           />
-          <CommentMenu
-            post={post}
-            comment={comment}
-            auth={auth}
-            setOnEdit={setOnEdit}
-          />
+          <CommentMenu post={post} comment={comment} setOnEdit={setOnEdit} />
         </div>
       </div>
       {onReply && (

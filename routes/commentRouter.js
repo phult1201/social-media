@@ -3,6 +3,7 @@ const commentController = require("../controllers/commentController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 router.post("/comment", authMiddleware, commentController.createComment);
+router.delete("/comment/:id", authMiddleware, commentController.deleteComment);
 router.patch("/comment/:id", authMiddleware, commentController.updateComment);
 router.patch(
   "/comment/:id/like",

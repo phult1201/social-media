@@ -23,7 +23,6 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
       reply: onReply && onReply.commentId,
       tag: onReply && onReply.user,
     };
-    console.log(newComment);
 
     dispatch(createComment(post, newComment, auth)).then(() => {
       if (setOnReply) return setOnReply(false);
