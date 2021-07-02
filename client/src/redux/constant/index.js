@@ -7,9 +7,11 @@ export const GLOBALTYPES = {
 
 export const PROFILE_TYPES = {
   LOADING: "LOADING",
-  GET_USER: "GET_USER",
   FOLLOW: "FOLLOW",
   UNFOLLOW: "UNFOLLOW",
+  GET_PROFILE_USER: "GET_PROFILE_USER",
+  GET_PROFILE_POSTS: "GET_PROFILE_POSTS",
+  GET_PROFILE_ID: "GET_PROFILE_ID",
 };
 
 export const POST_TYPES = {
@@ -17,6 +19,7 @@ export const POST_TYPES = {
   CREATE_POST: "CREATE_POST",
   UPDATE_POST: "UPDATE_POST",
   GET_POSTS: "GET_POSTS",
+  GET_POST: "GET_POST",
 };
 
 export const EditData = (data, id, post) => {

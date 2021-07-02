@@ -74,6 +74,22 @@ export const getPosts = (access_token) => {
   };
 };
 
+export const getPost = ({ detailPost, auth, id }) => {
+  return async (dispatch) => {
+    if (detailPost.every((post) => post._id !== id)) {
+      try {
+        const res = await getDataAPI(`/post/${id}`, auth.access_token);
+        dispatch({ type: POST_TYPES.GET_POST, payload: res.data.post });
+      } catch (error) {
+        return dispatch({
+          type: GLOBALTYPES.ALERT,
+          payload: { error: error.response.data.msg },
+        });
+      }
+    }
+  };
+};
+
 export const likePost = ({ post, auth }) => {
   return async (dispatch) => {
     const newPost = { ...post, likes: [...post.likes, auth.user] };

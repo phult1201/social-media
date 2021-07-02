@@ -2,20 +2,30 @@ import { GLOBALTYPES, PROFILE_TYPES } from "../constant";
 import { getDataAPI, patchDataAPI } from "../../utils/fetchData";
 import { uploadImage } from "../../utils/imageUpload";
 
-export const getProfileUser = ({ users, id, auth }) => {
+export const getProfileUser = ({ id, auth }) => {
   return async (dispatch) => {
-    if (users.every((user) => user._id !== id)) {
-      try {
-        dispatch({ type: PROFILE_TYPES.LOADING, payload: true });
-        const res = await getDataAPI(`/user/${id}`, auth.access_token);
-        dispatch({ type: PROFILE_TYPES.GET_USER, payload: res.data });
-        dispatch({ type: PROFILE_TYPES.LOADING, payload: false });
-      } catch (error) {
-        dispatch({
-          type: GLOBALTYPES.ALERT,
-          payload: { error: "I dont know" },
-        });
-      }
+    dispatch({ type: PROFILE_TYPES.GET_PROFILE_ID, payload: id });
+
+    try {
+      dispatch({ type: PROFILE_TYPES.LOADING, payload: true });
+      const res = await getDataAPI(`/user/${id}`, auth.access_token);
+      const res_posts = await getDataAPI(
+        `/user_posts/${id}`,
+        auth.access_token
+      );
+
+      dispatch({ type: PROFILE_TYPES.GET_PROFILE_USER, payload: res.data });
+      dispatch({
+        type: PROFILE_TYPES.GET_PROFILE_POSTS,
+        payload: { ...res_posts.data, _id: id, page: 2 },
+      });
+
+      dispatch({ type: PROFILE_TYPES.LOADING, payload: false });
+    } catch (error) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "I dont know" },
+      });
     }
   };
 };

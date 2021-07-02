@@ -58,6 +58,7 @@ img {
 @import url("./styles/profile/editprofile.css");
 @import url("./styles/profile/follow/follow-btn.css");
 @import url("./styles/profile/follow/follow.css");
+@import url("./styles/profile/post_thumb.css");
 
 /* Avatar */
 @import url("./styles/avatar/avatar.css");
