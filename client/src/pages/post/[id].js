@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getPost } from "../../redux/actions/postAction";
-import Posts from "../../components/home/Posts";
+import PostCard from "../../components/home/post_card/PostCard";
 
 const Post = () => {
   const { auth, detailPost } = useSelector((state) => state);
@@ -21,9 +21,9 @@ const Post = () => {
   }, [dispatch, detailPost, id, auth]);
 
   return (
-    <div>
-      {post.map((item) => (
-        <Posts />
+    <div className="detail-post" style={{ fontSize: "1.6rem" }}>
+      {post.map((data, index) => (
+        <PostCard post={data} key={index} />
       ))}
     </div>
   );

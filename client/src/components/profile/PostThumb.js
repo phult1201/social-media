@@ -9,7 +9,7 @@ const PostThumb = ({ posts, result }) => {
   return (
     <div className="post_thumb">
       {posts.map((post) => (
-        <Link key={post._id} to={`/profile/${post._id}`}>
+        <Link key={post._id} to={`/post/${post._id}`}>
           <div className="post_thumb_display">
             <img src={post.images[0].url} alt="post_thumb" />
 

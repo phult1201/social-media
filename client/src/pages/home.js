@@ -7,16 +7,13 @@ import Loading from "../components/alert/Loading";
 const Home = () => {
   const { homePosts } = useSelector((state) => state);
 
+  if (homePosts.loading) return <Loading />;
+
   return (
     <div className="home">
       <Status />
-      {homePosts.loading ? (
-        <Loading />
-      ) : homePosts.result === 0 ? (
-        <h2 style={{ textAlign: "center" }}>No Posts</h2>
-      ) : (
-        <Posts />
-      )}
+
+      {homePosts.result && <Posts />}
     </div>
   );
 };

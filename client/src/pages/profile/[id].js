@@ -24,6 +24,7 @@ const Profile = () => {
       {profile.loading ? (
         <Loading />
       ) : (
+        // PostThumb in profile
         <Posts auth={auth} profile={profile} dispatch={dispatch} id={id} />
       )}
     </div>

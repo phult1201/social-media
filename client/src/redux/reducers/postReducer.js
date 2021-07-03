@@ -16,7 +16,7 @@ const postReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: action.payload.posts,
-        result: action.payload.posts,
+        result: action.payload.result,
       };
     case POST_TYPES.CREATE_POST:
       return { ...state, posts: [action.payload, ...state.posts] };
