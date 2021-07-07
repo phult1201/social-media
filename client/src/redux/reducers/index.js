@@ -6,6 +6,7 @@ import status from "./statusReducer";
 import homePosts from "./postReducer";
 import modal from "./modalReducer";
 import detailPost from "./detailPostReducer";
+import discover from "./discoverReducer";
 
 const rootReducer = combineReducers({
   auth,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   homePosts,
   modal,
   detailPost,
+  discover,
 });
 
 export default rootReducer;

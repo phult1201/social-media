@@ -1,4 +1,4 @@
-import { PROFILE_TYPES } from "../constant";
+import { EditData, PROFILE_TYPES } from "../constant";
 
 const initialState = {
   loading: false,
@@ -36,6 +36,11 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...state.posts, action.payload],
+      };
+    case PROFILE_TYPES.UPDATE_PROFILE_POSTS:
+      return {
+        ...state,
+        posts: EditData(state.posts, action.payload._id, action.payload),
       };
     default:
       return state;

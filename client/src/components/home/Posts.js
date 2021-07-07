@@ -1,17 +1,44 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PostCard from "./post_card/PostCard";
 import Loading from "../alert/Loading";
+import LoadMoreBtn from "../LoadMoreBtn";
+import { getDataAPI } from "../../utils/fetchData";
+import { POST_TYPES } from "../../redux/constant";
 
 const Posts = () => {
-  const { homePosts } = useSelector((state) => state);
-  if (!homePosts) return <Loading />;
+  const { auth, homePosts } = useSelector((state) => state);
+  const [load, setLoad] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const handleLoadMore = async () => {
+    setLoad(true);
+    const res = await getDataAPI(
+      `/posts?limit=${homePosts.page * 9}`,
+      auth.access_token
+    );
+    dispatch({
+      type: POST_TYPES.GET_POSTS,
+      payload: { ...res.data, page: homePosts.page + 1 },
+    });
+    setLoad(false);
+  };
+
+  if (!homePosts || load) return <Loading />;
 
   return (
     <div className="posts">
       {homePosts.posts.map((post) => (
         <PostCard post={post} key={post._id} />
       ))}
+
+      <LoadMoreBtn
+        result={homePosts.result}
+        page={homePosts.page}
+        handleLoadMore={handleLoadMore}
+        load={load}
+      />
     </div>
   );
 };

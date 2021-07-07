@@ -22,4 +22,8 @@ router
   .route("/user_posts/:id")
   .get(authMiddleware, postController.getUserPosts);
 
+router
+  .route("/post_discover")
+  .get(authMiddleware, postController.getPostsDiscover);
+
 module.exports = router;
