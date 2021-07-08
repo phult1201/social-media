@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PostThumb from "./PostThumb";
 import LoadMoreBtn from "../LoadMoreBtn";
-import Loading from "../alert/Loading";
+import LoadIcon from "../LoadIcon";
 import { getDataAPI } from "../../utils/fetchData";
 import { PROFILE_TYPES } from "../../redux/constant";
 
@@ -21,8 +21,6 @@ const Posts = ({ auth, profile, dispatch, id }) => {
     });
   }, [profile.posts, id]);
 
-  if (load) return <Loading />;
-
   const handleLoadMore = async () => {
     setLoad(true);
     const res = await getDataAPI(
@@ -37,12 +35,17 @@ const Posts = ({ auth, profile, dispatch, id }) => {
   return (
     <div>
       <PostThumb posts={posts} result={result} />
-      <LoadMoreBtn
-        result={posts.result}
-        page={page}
-        handleLoadMore={handleLoadMore}
-        load={load}
-      />
+
+      {load && <LoadIcon />}
+
+      {!load && (
+        <LoadMoreBtn
+          result={posts.result}
+          page={page}
+          handleLoadMore={handleLoadMore}
+          load={load}
+        />
+      )}
     </div>
   );
 };

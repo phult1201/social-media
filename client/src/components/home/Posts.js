@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PostCard from "./post_card/PostCard";
-import Loading from "../alert/Loading";
 import LoadMoreBtn from "../LoadMoreBtn";
 import { getDataAPI } from "../../utils/fetchData";
 import { POST_TYPES } from "../../redux/constant";
+import LoadIcon from "../LoadIcon";
 
 const Posts = () => {
   const { auth, homePosts } = useSelector((state) => state);
@@ -25,20 +25,22 @@ const Posts = () => {
     setLoad(false);
   };
 
-  if (!homePosts || load) return <Loading />;
-
   return (
     <div className="posts">
       {homePosts.posts.map((post) => (
         <PostCard post={post} key={post._id} />
       ))}
 
-      <LoadMoreBtn
-        result={homePosts.result}
-        page={homePosts.page}
-        handleLoadMore={handleLoadMore}
-        load={load}
-      />
+      {load ? (
+        <LoadIcon />
+      ) : (
+        <LoadMoreBtn
+          result={homePosts.result}
+          page={homePosts.page}
+          handleLoadMore={handleLoadMore}
+          load={load}
+        />
+      )}
     </div>
   );
 };

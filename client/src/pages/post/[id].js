@@ -21,7 +21,10 @@ const Post = () => {
   }, [dispatch, detailPost, id, auth]);
 
   return (
-    <div className="detail-post" style={{ fontSize: "1.6rem" }}>
+    <div
+      className="detail-post"
+      style={{ fontSize: "1.6rem", margin: "12px 0" }}
+    >
       {post.map((data, index) => (
         <PostCard post={data} key={index} />
       ))}

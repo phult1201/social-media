@@ -1,0 +1,22 @@
+.load-more {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    padding: 8px 12px;
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    color: #555;
+    transition: transform 0.1s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05, 1.05);
+      color: #222;
+      background-color: #f1f1f1;
+      border: 1px solid #aaa;
+    }
+  }
+}

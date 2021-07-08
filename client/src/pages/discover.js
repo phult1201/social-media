@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getDiscoverPosts } from "../redux/actions/discoverAction";
 import { DISCOVER_TYPES } from "../redux/constant";
 import Loading from "../components/alert/Loading";
+import LoadIcon from "../components/LoadIcon";
 import PostThumb from "../components/profile/PostThumb";
 import LoadMoreBtn from "../components/LoadMoreBtn";
 import { getDataAPI } from "../utils/fetchData";
@@ -28,17 +29,22 @@ const Discover = () => {
     setLoad(false);
   };
 
-  if (discover.loading || load) return <Loading />;
+  if (discover.loading) return <Loading />;
 
   return (
     <div>
       <PostThumb posts={discover.posts} result={discover.result} />
-      <LoadMoreBtn
-        result={discover.result}
-        page={discover.page}
-        handleLoadMore={handleLoadMore}
-        load={load}
-      />
+
+      {load && <LoadIcon />}
+
+      {!load && (
+        <LoadMoreBtn
+          result={discover.result}
+          page={discover.page}
+          handleLoadMore={handleLoadMore}
+          load={load}
+        />
+      )}
     </div>
   );
 };

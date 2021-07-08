@@ -6,9 +6,9 @@ const LoadMoreBtn = ({ result, page, load, handleLoadMore }) => {
       {result < 3 * (page - 1)
         ? ""
         : !load && (
-            <button className="btn btn-load-more" onClick={handleLoadMore}>
-              Load more
-            </button>
+            <div className="load-more">
+              <button onClick={handleLoadMore}>Load more</button>
+            </div>
           )}
     </>
   );
