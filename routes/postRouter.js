@@ -10,7 +10,8 @@ router
 router
   .route("/post/:id")
   .patch(authMiddleware, postController.updatePost)
-  .get(authMiddleware, postController.getPost);
+  .get(authMiddleware, postController.getPost)
+  .delete(authMiddleware, postController.deletePost);
 
 router.route("/post/:id/like").patch(authMiddleware, postController.likePost);
 

@@ -1,19 +1,33 @@
 import moment from "moment";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Avatar from "../../avatar/Avatar";
 import { GLOBALTYPES } from "../../../redux/constant";
 import OutsideAlerter from "../../custom_components/OutsideAlerter";
+import { deletePost } from "../../../redux/actions/postAction";
+import { BASE_URL } from "../../../utils/config";
 
 const CardHeader = ({ post }) => {
   const { auth } = useSelector((state) => state);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const distpach = useDispatch();
+  const history = useHistory();
 
   const handleEditPost = () => {
     distpach({ type: GLOBALTYPES.STATUS, payload: { ...post, onEdit: true } });
+  };
+
+  const handleDeletePost = () => {
+    if (window.confirm("Do you want to delete this post?")) {
+      distpach(deletePost({ post, auth }));
+      return history.push("/");
+    }
+  };
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(`${BASE_URL}/post/${post._id}`);
   };
 
   return (
@@ -45,15 +59,27 @@ const CardHeader = ({ post }) => {
                     <span>Edit Post</span>
                   </div>
 
-                  <div className="dropdown-post-item">
+                  <div
+                    className="dropdown-post-item"
+                    onClick={() => {
+                      handleDeletePost();
+                      setShowDropdown();
+                    }}
+                  >
                     <i className="far fa-trash-alt"></i>
                     <span>Delete Post</span>
                   </div>
                 </>
               )}
-              <div className="dropdown-post-item">
+              <div
+                className="dropdown-post-item"
+                onClick={() => {
+                  handleCopyLink();
+                  setShowDropdown();
+                }}
+              >
                 <i className="far fa-copy"></i>
-                <span>Coppy</span>
+                <span>Coppy Link</span>
               </div>
             </div>
           </OutsideAlerter>

@@ -1,4 +1,5 @@
 const Posts = require("../models/postModel");
+const Comments = require("../models/commentModel");
 
 class APIfeatures {
   constructor(query, queryString) {
@@ -52,6 +53,19 @@ const postController = {
       return res.status(500).json({ msg: error.message });
     }
   },
+  deletePost: async (req, res) => {
+    try {
+      const post = await findOneAndDelete({
+        _id: req.params.id,
+        user: req.user._id,
+      });
+      await Comments.deleteMany({ _id: { $in: post.comments } });
+
+      return res.json({ msg: "Deleted Post." });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
   updatePost: async (req, res) => {
     try {
       const { content, images } = req.body;
@@ -83,13 +97,15 @@ const postController = {
   },
   likePost: async (req, res) => {
     try {
-      await Posts.findOneAndUpdate(
+      const like = await Posts.findOneAndUpdate(
         { _id: req.params.id },
         {
           $push: { likes: req.user._id },
         },
         { new: true }
       );
+      if (!like)
+        return res.status(400).json({ msg: "This post does not exist." });
 
       return res.status(200).json({ msg: "liked" });
     } catch (error) {
@@ -98,13 +114,15 @@ const postController = {
   },
   unLikePost: async (req, res) => {
     try {
-      await Posts.findOneAndUpdate(
+      const like = await Posts.findOneAndUpdate(
         { _id: req.params.id },
         {
           $pull: { likes: req.user._id },
         },
         { new: true }
       );
+      if (!like)
+        return res.status(400).json({ msg: "This post does not exist." });
       return res.status(200).json({ msg: "unliked" });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
@@ -131,6 +149,10 @@ const postController = {
           path: "comments",
           populate: { path: "user likes", select: "-password" },
         });
+
+      if (!post)
+        return res.status(400).json({ msg: "This post does not exist." });
+
       return res.status(200).json({ post });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
@@ -138,15 +160,23 @@ const postController = {
   },
   getPostsDiscover: async (req, res) => {
     try {
-      console.log(req.query);
-      const features = new APIfeatures(
-        Posts.find({
-          user: { $nin: [...req.user.following, req.user._id] },
-        }),
-        req.query
-      ).paginating();
+      // const features = new APIfeatures(
+      //   Posts.find({
+      //     user: { $nin: [...req.user.following, req.user._id] },
+      //   }),
+      //   req.query
+      // ).paginating();
 
-      const posts = await features.query.sort("-createdAt");
+      // const posts = await features.query.sort("-createdAt");
+
+      const newArr = [...req.user.following, req.user._id];
+      const num = req.query.num || 3;
+      const posts = await Posts.aggregate([
+        { $match: { user: { $nin: newArr } } },
+        { $sample: { size: Number(num) } },
+      ]);
+
+      if (!posts) return res.status(400).json({ msg: "Something wrong" });
 
       return res
         .status(200)

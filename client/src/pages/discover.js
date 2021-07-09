@@ -22,7 +22,7 @@ const Discover = () => {
   const handleLoadMore = async () => {
     setLoad(true);
     const res = await getDataAPI(
-      `/post_discover?limit=${discover.page * 3}`,
+      `/post_discover?num=${discover.page * 3}`,
       auth.access_token
     );
     dispatch({ type: DISCOVER_TYPES.UPDATE_DISCOVER_POSTS, payload: res.data });

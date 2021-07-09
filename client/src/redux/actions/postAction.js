@@ -1,5 +1,10 @@
 import { uploadImage } from "../../utils/imageUpload";
-import { getDataAPI, postDataAPI, patchDataAPI } from "../../utils/fetchData";
+import {
+  getDataAPI,
+  postDataAPI,
+  patchDataAPI,
+  deleteDataAPI,
+} from "../../utils/fetchData";
 import { GLOBALTYPES, POST_TYPES } from "../constant";
 
 export const createPost = ({ content, images, auth }) => {
@@ -20,6 +25,21 @@ export const createPost = ({ content, images, auth }) => {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } });
     } catch (error) {
       dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};
+
+export const deletePost = ({ post, auth }) => {
+  return async (dispatch) => {
+    dispatch({ type: POST_TYPES.DELETE_POST, payload: post });
+
+    try {
+      deleteDataAPI(`/post/${post._id}`, auth.access_token);
+    } catch (error) {
+      return dispatch({
         type: GLOBALTYPES.ALERT,
         payload: { error: error.response.data.msg },
       });

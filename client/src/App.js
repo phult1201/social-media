@@ -11,6 +11,7 @@ import Register from "./pages/register";
 import { refreshtoken } from "./redux/actions/authAction";
 import StatusModal from "./components/home/StatusModal";
 import { getPosts } from "./redux/actions/postAction";
+import { getSuggestions } from "./redux/actions/suggestionsAction";
 
 function App() {
   const { auth, status } = useSelector((state) => state);
@@ -21,7 +22,10 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (auth.access_token) dispatch(getPosts(auth.access_token));
+    if (auth.access_token) {
+      dispatch(getPosts(auth.access_token));
+      dispatch(getSuggestions(auth.access_token));
+    }
   }, [dispatch, auth.access_token]);
 
   return (

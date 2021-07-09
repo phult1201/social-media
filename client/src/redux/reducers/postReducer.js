@@ -1,5 +1,5 @@
 import { POST_TYPES } from "../constant";
-import { EditData } from "../constant";
+import { EditData, DeleteData } from "../constant";
 
 const initialState = {
   loading: false,
@@ -26,6 +26,8 @@ const postReducer = (state = initialState, action) => {
         ...state,
         posts: EditData(state.posts, action.payload._id, action.payload),
       };
+    case POST_TYPES.DELETE_POST:
+      return DeleteData(state.posts, action.payload._id);
     default:
       return state;
   }
