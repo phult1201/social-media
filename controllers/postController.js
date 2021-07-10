@@ -55,7 +55,7 @@ const postController = {
   },
   deletePost: async (req, res) => {
     try {
-      const post = await findOneAndDelete({
+      const post = await Posts.findOneAndDelete({
         _id: req.params.id,
         user: req.user._id,
       });

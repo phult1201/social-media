@@ -35,7 +35,6 @@ export const createPost = ({ content, images, auth }) => {
 export const deletePost = ({ post, auth }) => {
   return async (dispatch) => {
     dispatch({ type: POST_TYPES.DELETE_POST, payload: post });
-
     try {
       deleteDataAPI(`/post/${post._id}`, auth.access_token);
     } catch (error) {

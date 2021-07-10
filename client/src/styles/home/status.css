@@ -9,7 +9,7 @@
   position: relative;
   left: 50%;
   transform: translate(-50%);
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 .status-btn {

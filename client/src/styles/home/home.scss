@@ -1,0 +1,56 @@
+.home {
+  display: grid;
+  margin-top: 20px;
+  font-size: 1.4rem;
+  grid-template-columns: [col1-start] 20% [col1-end col2-start] auto [col2-end col3-start] 20% [col3-end];
+
+  &_main {
+    grid-column-start: col2-start;
+    grid-column-end: col2-end;
+  }
+
+  &_right {
+    grid-column-start: col3-start;
+    grid-column-end: col3-end;
+
+    .suggestion {
+      &-auth {
+        display: flex;
+        align-items: center;
+        .card-user-info {
+          margin-left: 4px;
+        }
+      }
+
+      &-reload {
+        display: flex;
+        margin: 10px 0;
+        font-size: 1.6rem;
+        align-items: center;
+        justify-content: space-between;
+
+        i {
+          cursor: pointer;
+        }
+      }
+
+      &-user {
+        margin-top: 20px;
+
+        &--item {
+          .card-user {
+            display: flex;
+            align-items: center;
+            &-info {
+              margin-left: 4px;
+            }
+          }
+          display: flex;
+          align-items: center;
+          margin: 20px 0;
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+}
