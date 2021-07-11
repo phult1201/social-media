@@ -1,20 +1,13 @@
 import React from "react";
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 
 const LikeButton = ({ isLike, handleLike, handleUnLike }) => {
   return (
     <>
       {isLike ? (
-        <i
-          className="fas fa-heart"
-          onClick={handleUnLike}
-          style={{ cursor: "pointer", color: "#FF616D" }}
-        ></i>
+        <AiFillLike onClick={handleUnLike} />
       ) : (
-        <i
-          className="far fa-heart"
-          onClick={handleLike}
-          style={{ cursor: "pointer" }}
-        ></i>
+        <AiOutlineLike onClick={handleLike} />
       )}
     </>
   );

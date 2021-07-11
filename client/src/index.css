@@ -54,6 +54,7 @@ img {
 @import url("./styles/alert/loading.css");
 
 /* Profile */
+@import url("./styles/profile/profile.css");
 @import url("./styles/profile/infor.css");
 @import url("./styles/profile/editprofile.css");
 @import url("./styles/profile/follow/follow-btn.css");

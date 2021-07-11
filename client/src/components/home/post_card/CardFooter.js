@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { likePost, unLikePost } from "../../../redux/actions/postAction";
+import {
+  likePost,
+  savePost,
+  unLikePost,
+  unsavePost,
+} from "../../../redux/actions/postAction";
 import ShareModal from "../ShareModal";
 import LikeButton from "../LikeButton";
 import { BASE_URL } from "../../../utils/config";
+import {
+  BsBookmarksFill,
+  BsBookmarks,
+  BsChatDots,
+  BsReplyAll,
+} from "react-icons/bs";
 
 const CardFooter = ({ post }) => {
   const [isLike, setIsLike] = useState(false);
   const [loadLike, setLoadLike] = useState(false);
   const [isShare, setIsShare] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state);
@@ -33,8 +45,18 @@ const CardFooter = ({ post }) => {
   useEffect(() => {
     if (post.likes.find((like) => like._id === auth.user._id)) {
       setIsLike(true);
+    } else {
+      setIsLike(false);
     }
   }, [post.likes, auth.user]);
+
+  useEffect(() => {
+    if (auth.user.saved.find((saveId) => saveId === post._id)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [post._id, auth.user.saved]);
 
   return (
     <div className="card_footer">
@@ -46,15 +68,20 @@ const CardFooter = ({ post }) => {
             handleUnLike={handleUnLike}
           />
           <Link to={`/post/${post._id}`}>
-            <i className="far fa-comment" />
+            <BsChatDots />
           </Link>
-          <i
-            className="far fa-paper-plane"
+          <BsReplyAll
             style={{ cursor: "pointer" }}
             onClick={() => setIsShare(!isShare)}
-          ></i>
+          />
         </div>
-        <i className="far fa-bookmark" />
+        {saved ? (
+          <BsBookmarksFill
+            onClick={() => dispatch(unsavePost({ post, auth }))}
+          />
+        ) : (
+          <BsBookmarks onClick={() => dispatch(savePost({ post, auth }))} />
+        )}
       </div>
 
       <div className="card_footer-count">

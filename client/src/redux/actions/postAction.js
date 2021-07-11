@@ -146,3 +146,36 @@ export const unLikePost = ({ post, auth }) => {
     }
   };
 };
+
+export const savePost = ({ post, auth }) => {
+  return async (dispatch) => {
+    const newUser = { ...auth.user, saved: [...auth.user.saved, post._id] };
+    dispatch({ type: GLOBALTYPES.AUTH, payload: { ...auth, user: newUser } });
+    try {
+      await patchDataAPI(`/savePost/${post._id}`, null, auth.access_token);
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};
+
+export const unsavePost = ({ post, auth }) => {
+  return async (dispatch) => {
+    const newUser = {
+      ...auth.user,
+      saved: auth.user.saved.filter((saveId) => saveId !== post._id),
+    };
+    dispatch({ type: GLOBALTYPES.AUTH, payload: { ...auth, user: newUser } });
+    try {
+      await patchDataAPI(`/unsavePost/${post._id}`, null, auth.access_token);
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};

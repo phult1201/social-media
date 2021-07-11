@@ -1,0 +1,33 @@
+.profile {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.profile_tab {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.profile_tab button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  background-color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.6rem;
+  padding: 5px 20px;
+  margin: 0 25px;
+  opacity: 0.5;
+}
+
+.profile_tab button.active {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  opacity: 0.8;
+}

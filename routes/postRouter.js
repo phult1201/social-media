@@ -27,4 +27,12 @@ router
   .route("/post_discover")
   .get(authMiddleware, postController.getPostsDiscover);
 
+router.route("/savePost/:id").patch(authMiddleware, postController.savePost);
+
+router
+  .route("/unsavePost/:id")
+  .patch(authMiddleware, postController.unsavePost);
+
+router.route(`/getSavePosts`).get(authMiddleware, postController.getSavePosts);
+
 module.exports = router;

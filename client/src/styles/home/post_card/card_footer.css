@@ -6,13 +6,14 @@
 .card_footer-icon {
   font-size: 2.4rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-.card_footer-icon .fa-heart,
-.card_footer-icon .fa-comment,
-.card_footer-icon .fa-paper-plane {
+.card_footer-icon svg {
+  font-size: 2.4rem;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .card_footer-count {
