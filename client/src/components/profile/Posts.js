@@ -7,8 +7,8 @@ import { PROFILE_TYPES } from "../../redux/constant";
 
 const Posts = ({ auth, profile, dispatch, id }) => {
   const [posts, setPosts] = useState([]);
-  const [result, setResult] = useState(9);
-  const [page, setPage] = useState(0);
+  const [result, setResult] = useState(3);
+  const [page, setPage] = useState(2);
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const Posts = ({ auth, profile, dispatch, id }) => {
       if (data._id === id) {
         setPosts(data.posts);
         setPage(data.page);
-        setResult(data.result);
+        setResult(data.posts.length);
       }
     });
   }, [profile.posts, id]);
@@ -33,20 +33,20 @@ const Posts = ({ auth, profile, dispatch, id }) => {
   };
 
   return (
-    <div>
+    <>
       <PostThumb posts={posts} result={result} />
 
       {load && <LoadIcon />}
 
       {!load && (
         <LoadMoreBtn
-          result={posts.result}
+          result={result}
           page={page}
           handleLoadMore={handleLoadMore}
           load={load}
         />
       )}
-    </div>
+    </>
   );
 };
 

@@ -6,7 +6,6 @@ export const getDiscoverPosts = (token) => {
     try {
       dispatch({ type: DISCOVER_TYPES.LOADING, payload: true });
       const res = await getDataAPI("/post_discover", token);
-      console.log(res);
       dispatch({ type: DISCOVER_TYPES.GET_DISCOVER_POSTS, payload: res.data });
       dispatch({ type: DISCOVER_TYPES.LOADING, payload: false });
     } catch (error) {
