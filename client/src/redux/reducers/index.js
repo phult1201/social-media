@@ -8,6 +8,7 @@ import modal from "./modalReducer";
 import detailPost from "./detailPostReducer";
 import discover from "./discoverReducer";
 import suggestions from "./suggestionsReducer";
+import socket from "./socketReducer";
 
 const rootReducer = combineReducers({
   auth,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   detailPost,
   discover,
   suggestions,
+  socket,
 });
 
 export default rootReducer;

@@ -3,6 +3,7 @@ export const GLOBALTYPES = {
   ALERT: "ALERT",
   STATUS: "STATUS",
   MODAL: "MODAL",
+  SOCKET: "SOCKET",
 };
 
 export const PROFILE_TYPES = {

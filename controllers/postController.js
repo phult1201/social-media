@@ -44,7 +44,7 @@ const postController = {
 
       const posts = await features.query
         .sort("-createdAt")
-        .populate("user likes", "avatar lastname firstname username")
+        .populate("user likes", "avatar lastname firstname username followers")
         .populate({
           path: "comments",
           populate: { path: "user likes", select: "-password" },

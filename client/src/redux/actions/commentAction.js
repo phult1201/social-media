@@ -5,11 +5,13 @@ import {
   postDataAPI,
 } from "../../utils/fetchData";
 
-export const createComment = (post, newComment, auth) => {
+export const createComment = ({ post, newComment, auth, socket }) => {
   return async (dispatch) => {
     const newPost = { ...post, comments: [...post.comments, newComment] };
 
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+
+    socket.emit("createComment", newPost);
 
     try {
       const data = {
@@ -30,7 +32,7 @@ export const createComment = (post, newComment, auth) => {
   };
 };
 
-export const deleteComment = ({ post, auth, comment }) => {
+export const deleteComment = ({ post, auth, comment, socket }) => {
   return async (dispatch) => {
     const deleteArr = [
       ...post.comments.filter((cm) => cm.reply === comment._id),
@@ -43,8 +45,11 @@ export const deleteComment = ({ post, auth, comment }) => {
       ),
     };
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
+
+    socket.emit("deleteComment", newPost);
+
     try {
-      deleteArr.forEach((item) => {
+      await deleteArr.forEach((item) => {
         deleteDataAPI(`/comment/${item._id}`, auth.access_token);
       });
     } catch (error) {

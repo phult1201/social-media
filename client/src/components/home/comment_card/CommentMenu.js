@@ -4,13 +4,13 @@ import { deleteComment } from "../../../redux/actions/commentAction";
 import OutsideAlerter from "../../custom_components/OutsideAlerter";
 
 const CommentMenu = ({ post, comment, setOnEdit }) => {
-  const { auth } = useSelector((state) => state);
+  const { auth, socket } = useSelector((state) => state);
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
   const handleRemove = () => {
     if (post.user._id === auth.user._id || comment.user._id === auth.user._id) {
-      dispatch(deleteComment({ post, auth, comment }));
+      dispatch(deleteComment({ post, auth, comment, socket }));
     }
   };
 
