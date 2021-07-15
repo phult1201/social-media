@@ -9,7 +9,7 @@ import { deletePost } from "../../../redux/actions/postAction";
 import { BASE_URL } from "../../../utils/config";
 
 const CardHeader = ({ post }) => {
-  const { auth } = useSelector((state) => state);
+  const { auth, socket } = useSelector((state) => state);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const distpach = useDispatch();
@@ -21,7 +21,7 @@ const CardHeader = ({ post }) => {
 
   const handleDeletePost = () => {
     if (window.confirm("Do you want to delete this post?")) {
-      distpach(deletePost({ post, auth }));
+      distpach(deletePost({ post, auth, socket }));
       return history.push("/");
     }
   };

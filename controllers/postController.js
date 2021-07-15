@@ -28,7 +28,10 @@ const postController = {
 
       await newPost.save();
 
-      res.status(201).json({ msg: "Create a post success", newPost });
+      res.status(201).json({
+        msg: "Create a post success",
+        newPost: { ...newPost._doc, user: req.user },
+      });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -62,7 +65,10 @@ const postController = {
       });
       await Comments.deleteMany({ _id: { $in: post.comments } });
 
-      return res.json({ msg: "Deleted Post." });
+      return res.json({
+        msg: "Deleted Post.",
+        newPost: { ...post, user: req.user },
+      });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }

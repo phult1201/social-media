@@ -5,7 +5,7 @@ import { createPost, updatePost } from "../../redux/actions/postAction";
 import Overlay from "../overlay/Overlay";
 
 const StatusModal = () => {
-  const { auth, status } = useSelector((state) => state);
+  const { auth, status, socket } = useSelector((state) => state);
 
   const [content, setContent] = useState("");
   const [images, setImages] = useState([]);
@@ -88,7 +88,7 @@ const StatusModal = () => {
     if (status.onEdit) {
       dispatch(updatePost({ content, images, auth, status }));
     } else {
-      dispatch(createPost({ content, images, auth }));
+      dispatch(createPost({ content, images, auth, socket }));
     }
 
     setContent("");
