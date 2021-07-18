@@ -34,6 +34,18 @@ const notifyController = {
       return res.status(500).json({ msg: error.message });
     }
   },
+  getNotifies: async (req, res) => {
+    try {
+      const notifies = await Notifies.find({
+        recipients: req.user._id,
+      })
+        .sort("isRead")
+        .populate("user", "avatar lastname firstname");
+      return res.status(200).json({ notifies });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
 };
 
 module.exports = notifyController;

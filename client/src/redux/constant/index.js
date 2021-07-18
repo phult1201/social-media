@@ -36,6 +36,10 @@ export const SUGGESTIONS_TYPE = {
   GET_USERS_SUGGESTIONS: "GET_USERS_SUGGESTIONS",
 };
 
+export const NOTIFY_TYPES = {
+  GET_NOTIFIES: "GET_NOTIFIES",
+};
+
 export const EditData = (data, id, post) => {
   const newData = data.map((item) => (item._id === id ? post : item));
   return newData;

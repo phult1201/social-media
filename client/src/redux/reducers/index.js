@@ -9,6 +9,7 @@ import detailPost from "./detailPostReducer";
 import discover from "./discoverReducer";
 import suggestions from "./suggestionsReducer";
 import socket from "./socketReducer";
+import notify from "./notifyReducer";
 
 const rootReducer = combineReducers({
   auth,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   discover,
   suggestions,
   socket,
+  notify,
 });
 
 export default rootReducer;
