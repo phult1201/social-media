@@ -8,6 +8,9 @@ const Avatar = ({
   onChange,
   className = "avatar-className",
   style,
+  avaName = false,
+  firstName = "",
+  lastName = "",
 }) => {
   return (
     <div className={`avatar ${className}`} style={{ ...style }}>
@@ -35,6 +38,13 @@ const Avatar = ({
           </div>
         )}
       </div>
+      {avaName && (
+        <div className="avatar-name">
+          <small>
+            {firstName} {lastName}
+          </small>
+        </div>
+      )}
     </div>
   );
 };

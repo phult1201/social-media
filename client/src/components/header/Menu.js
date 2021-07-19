@@ -118,7 +118,9 @@ const Menu = () => {
         )}
       </ul>
 
-      {showNotifyModal && <NotifyModal />}
+      {showNotifyModal && (
+        <NotifyModal setShowNotifyModal={setShowNotifyModal} />
+      )}
     </div>
   );
 };

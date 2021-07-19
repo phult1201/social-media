@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from "react";
 
-function useOutSideAlerter(ref, setShowDropdown) {
+const OutsideAlerter = ({ children, setShowDropdown }) => {
+  const wrapperRef = useRef();
+
   useEffect(() => {
     function handleClickOutSide(e) {
-      if (ref.current && !ref.current.contains(e.target)) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
         setShowDropdown(false);
       }
     }
@@ -12,12 +14,7 @@ function useOutSideAlerter(ref, setShowDropdown) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutSide);
     };
-  }, [ref, setShowDropdown]);
-}
-
-const OutsideAlerter = ({ children, setShowDropdown }) => {
-  const wrapperRef = useRef();
-  useOutSideAlerter(wrapperRef, setShowDropdown);
+  }, [wrapperRef, setShowDropdown]);
 
   return <div ref={wrapperRef}>{children}</div>;
 };

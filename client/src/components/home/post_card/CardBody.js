@@ -12,7 +12,7 @@ const CardBody = ({ post }) => {
             ? post.content
             : readMore
             ? post.content + " "
-            : post.content.slice(0, 60) + " ..."}
+            : post.content.slice(0, 100) + " ..."}
         </span>
         {post.content.length > 60 && (
           <span

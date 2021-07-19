@@ -1,16 +1,6 @@
 .comment-card {
   margin-bottom: 10px;
 
-  &_avatar a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    span {
-      margin-left: 4px;
-      font-size: 1.4rem;
-    }
-  }
-
   &_content {
     display: flex;
     align-items: center;

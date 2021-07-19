@@ -2,17 +2,6 @@
   margin-bottom: 10px;
 }
 
-.comment-card_avatar a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.comment-card_avatar a span {
-  margin-left: 4px;
-  font-size: 1.4rem;
-}
-
 .comment-card_content {
   display: flex;
   align-items: center;

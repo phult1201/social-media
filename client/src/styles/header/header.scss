@@ -80,17 +80,11 @@
       border-bottom: 1px solid #ddd;
       transition: all 100ms ease;
 
-      &-img {
-        margin-right: 10px;
-      }
-
-      &-info > * {
-        font-size: 1.6rem;
-        margin-right: 4px;
-      }
-
       &:hover {
         background-color: rgb(74, 78, 105);
+      }
+
+      &:hover .avatar .avatar-name {
         color: #fff;
       }
     }

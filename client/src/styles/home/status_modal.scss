@@ -1,4 +1,5 @@
 .status_modal {
+  display: inline-block;
   position: sticky;
   background-color: #fff;
   border-radius: 20px;
@@ -6,7 +7,6 @@
   max-width: 480px;
   top: 15%;
   z-index: 100;
-  left: calc(50% - 480px / 2);
 
   &-form {
     border: 1px solid #f1f1f1;

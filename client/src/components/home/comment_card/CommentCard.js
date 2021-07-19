@@ -75,11 +75,10 @@ const CommentCard = ({ post, comment, commentId, children }) => {
           <Avatar
             avaSize="very-small"
             avaImg={comment.user.avatar}
-            style={{ display: "inline-block" }}
+            avaName={true}
+            firstName={comment.user.firstname}
+            lastName={comment.user.lastname}
           />
-          <span style={{ display: "inline-block" }}>
-            {comment.user.firstname} {comment.user.lastname}
-          </span>
         </Link>
       </div>
       <div className="comment-card_content" style={{}}>

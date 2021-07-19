@@ -84,3 +84,6 @@ img {
 /* Load */
 @import url("./styles/load/load_icon.css");
 @import url("./styles/load/load_more_btn.css");
+
+/* Notify */
+@import url("./styles/notify/notify.css");

@@ -1,19 +1,20 @@
 .avatar {
   position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar-container {
   width: fit-content;
   border-radius: 50%;
-  box-shadow: 1px 1px 24px #eee;
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .avatar-img {
+  display: inline-block;
   border-radius: 50%;
 }
 
@@ -39,6 +40,13 @@
   width: 30px;
   height: 30px;
   object-fit: cover;
+}
+
+.avatar-name {
+  font-size: 1.6rem;
+  color: #555;
+  margin-left: 8px;
+  display: inline-block;
 }
 
 .avatar-edit {

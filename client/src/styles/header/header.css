@@ -83,17 +83,11 @@
   transition: all 100ms ease;
 }
 
-.search_form-users .card-user-img {
-  margin-right: 10px;
-}
-
-.search_form-users .card-user-info > * {
-  font-size: 1.6rem;
-  margin-right: 4px;
-}
-
 .search_form-users .card-user:hover {
   background-color: #4a4e69;
+}
+
+.search_form-users .card-user:hover .avatar .avatar-name {
   color: #fff;
 }
 
