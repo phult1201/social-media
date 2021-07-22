@@ -4,7 +4,14 @@ import { GLOBALTYPES, NOTIFY_TYPES } from "../constant";
 export const createNofity = ({ msg, auth, socket }) => {
   return async (dispatch) => {
     try {
-      await postDataAPI(`/notify`, msg, auth.access_token);
+      const res = await postDataAPI(`/notify`, msg, auth.access_token);
+      socket.emit("createNotify", {
+        ...res.data.notify,
+        user: {
+          username: auth.user.username,
+          avatar: auth.user.avatar,
+        },
+      });
     } catch (error) {
       return dispatch({
         type: GLOBALTYPES.ALERT,
@@ -17,11 +24,12 @@ export const createNofity = ({ msg, auth, socket }) => {
 export const removeNofity = ({ msg, auth, socket }) => {
   return async (dispatch) => {
     try {
-      const res = await deleteDataAPI(
+      await deleteDataAPI(
         `/notify/${msg.id}?url=${msg.url}`,
         auth.access_token
       );
-      console.log(res);
+
+      socket.emit("removeNotify", msg);
     } catch (error) {
       return dispatch({
         type: GLOBALTYPES.ALERT,

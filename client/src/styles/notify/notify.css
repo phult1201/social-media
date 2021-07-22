@@ -8,7 +8,8 @@
   background-color: #fafafa;
   box-shadow: 1px 1px 12px #ccc;
   font-size: 1.4rem;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: calc(80vh - 80px);
 }
 
 .notify_header {
@@ -22,6 +23,11 @@
 
 .notify_header i {
   cursor: pointer;
+}
+
+.notify_body {
+  height: 300px;
+  overflow-y: auto;
 }
 
 .notify_body-content {

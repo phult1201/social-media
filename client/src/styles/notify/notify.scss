@@ -8,7 +8,8 @@
   background-color: #fafafa;
   box-shadow: 1px 1px 12px #ccc;
   font-size: 1.4rem;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: calc(80vh - 80px);
 
   &_header {
     font-size: 2rem;
@@ -24,6 +25,9 @@
   }
 
   &_body {
+    height: 300px;
+    overflow-y: auto;
+
     &-content {
       display: grid;
       grid-template-columns: [col1-start] 50px [col1-end col2-start ] auto [col2-end];

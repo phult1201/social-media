@@ -1,14 +1,12 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import OutsideAlerter from "./custom_components/OutsideAlerter";
-import Avatar from "./avatar/Avatar";
-
 import moment from "moment";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Avatar from "./avatar/Avatar";
+import OutsideAlerter from "./custom_components/OutsideAlerter";
 
 const NotifyModal = ({ setShowNotifyModal }) => {
   const { auth, notify } = useSelector((state) => state);
-  const dispatch = useDispatch();
 
   return (
     <OutsideAlerter setShowDropdown={setShowNotifyModal}>
@@ -24,7 +22,17 @@ const NotifyModal = ({ setShowNotifyModal }) => {
 
         <div className="notify_body">
           {notify.data.length === 0 && (
-            <i className="fas fa-bell-slash" style={{ width: "40px" }} />
+            <i
+              className="fas fa-bell-slash"
+              style={{
+                position: "relative",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                fontSize: "6rem",
+                color: "#ccc",
+              }}
+            />
           )}
           {notify.data.map((msg, index) => (
             <Link to={`${msg.url}`}>

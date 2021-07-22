@@ -5,6 +5,8 @@ const notifyController = {
     try {
       const { id, recipients, url, text, content, image } = req.body;
 
+      if (recipients.includes(req.user._id.toString())) return;
+
       const notify = new Notifies({
         id,
         recipients,
@@ -39,7 +41,7 @@ const notifyController = {
       const notifies = await Notifies.find({
         recipients: req.user._id,
       })
-        .sort("isRead")
+        .sort("-createdAt")
         .populate("user", "avatar lastname firstname");
       return res.status(200).json({ notifies });
     } catch (error) {

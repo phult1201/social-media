@@ -1,6 +1,7 @@
 import { GLOBALTYPES, PROFILE_TYPES } from "../constant";
 import { getDataAPI, patchDataAPI } from "../../utils/fetchData";
 import { uploadImage } from "../../utils/imageUpload";
+import { createNofity, removeNofity } from "./notifyAction";
 
 export const getProfileUser = ({ id, auth }) => {
   return async (dispatch) => {
@@ -93,6 +94,15 @@ export const follow = ({ users, user, auth, socket }) => {
         auth.access_token
       );
       socket.emit("follow", res.data.newUser);
+
+      const msg = {
+        id: auth.user._id,
+        text: "has started follow you.",
+        recipients: [newUser._id],
+        url: `/profile/${auth.user._id}`,
+      };
+
+      dispatch(createNofity({ msg, auth, socket }));
     } catch (error) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -130,6 +140,15 @@ export const unfollow = ({ users, user, auth, socket }) => {
         auth.access_token
       );
       socket.emit("unFollow", res.data.newUser);
+
+      const msg = {
+        id: auth.user._id,
+        text: "has started follow you.",
+        recipients: [newUser._id],
+        url: `/profile/${auth.user._id}`,
+      };
+
+      dispatch(removeNofity({ msg, auth, socket }));
     } catch (error) {
       dispatch({
         type: GLOBALTYPES.ALERT,

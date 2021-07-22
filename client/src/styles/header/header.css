@@ -98,14 +98,28 @@
 }
 
 .menu_list-item {
-  font-size: 1.6rem;
+  cursor: pointer;
+  position: relative;
+  font-size: 3.2rem;
   margin-right: 10px;
-  color: rgba(74, 78, 105, 0.5);
   padding-right: 8px;
   transition: all 200ms;
 }
 
-.menu_list-item--active {
+.menu_list-item .notify-number {
+  font-size: 1.2rem;
+  color: #fff;
+  position: absolute;
+  left: 13px;
+  top: 8px;
+}
+
+.menu_list-item a span {
+  font-size: 2.8rem;
+  color: #ccc;
+}
+
+.menu_list-item--active a span {
   color: #4a4e69;
 }
 
@@ -121,6 +135,7 @@
 }
 
 .menu_avatar {
+  cursor: pointer;
   font-size: 1.6rem;
   position: relative;
   color: #555;

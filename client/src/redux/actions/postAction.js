@@ -28,7 +28,7 @@ export const createPost = ({ content, images, auth, socket }) => {
       // Notification
       const msg = {
         id: res.data.newPost._id,
-        text: "Added a new post",
+        text: "added a new post",
         recipients: res.data.newPost.user.followers,
         url: `/post/${res.data.newPost._id}`,
         content,
@@ -53,7 +53,7 @@ export const deletePost = ({ post, auth, socket }) => {
 
       const msg = {
         id: post._id,
-        text: "Added a new post",
+        text: "added a new post",
         recipients: res.data.newPost.user.followers,
         url: `/post/${post._id}`,
       };
@@ -143,6 +143,16 @@ export const likePost = ({ post, auth, socket }) => {
 
     try {
       await patchDataAPI(`/post/${post._id}/like`, null, auth.access_token);
+      const msg = {
+        id: auth.user._id,
+        text: "like your post",
+        recipients: [post.user._id],
+        url: `/post/${post._id}`,
+        content: post.content,
+        image: post.images[0].url,
+      };
+
+      dispatch(createNofity({ msg, auth, socket }));
     } catch (error) {
       return dispatch({
         type: GLOBALTYPES.ALERT,
@@ -165,6 +175,15 @@ export const unLikePost = ({ post, auth, socket }) => {
 
     try {
       await patchDataAPI(`/post/${post._id}/unlike`, null, auth.access_token);
+
+      const msg = {
+        id: auth.user._id,
+        text: "like your post",
+        recipients: [post.user._id],
+        url: `/post/${post._id}`,
+      };
+
+      dispatch(removeNofity({ msg, auth, socket }));
     } catch (error) {
       return dispatch({
         type: GLOBALTYPES.ALERT,

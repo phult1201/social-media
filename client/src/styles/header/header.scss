@@ -99,13 +99,27 @@
     align-items: center;
 
     &-item {
-      font-size: 1.6rem;
+      cursor: pointer;
+      position: relative;
+      font-size: 3.2rem;
       margin-right: 10px;
-      color: rgba(74, 78, 105, 0.5);
       padding-right: 8px;
       transition: all 200ms;
 
-      &--active {
+      .notify-number {
+        font-size: 1.2rem;
+        color: #fff;
+        position: absolute;
+        left: 13px;
+        top: 8px;
+      }
+
+      & a span {
+        font-size: 2.8rem;
+        color: #ccc;
+      }
+
+      &--active a span {
         color: rgb(74, 78, 105);
       }
     }
@@ -123,6 +137,7 @@
   }
 
   &_avatar {
+    cursor: pointer;
     font-size: 1.6rem;
     position: relative;
     color: #555;
