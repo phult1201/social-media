@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const chalk = require("chalk");
 const SocketServer = require("./socketServer");
 
 const app = express();
@@ -12,7 +13,19 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
-app.use(morgan("tiny"));
+app.use(
+  morgan(function (tokens, req, res) {
+    return (
+      chalk.cyanBright(tokens.method(req, res)) +
+      " " +
+      chalk.green(tokens.url(req, res)) +
+      " " +
+      chalk.yellow(tokens.status(req, res)) +
+      " " +
+      chalk.red(tokens["response-time"](req, res))
+    );
+  })
+);
 
 // SocketIO
 const http = require("http").createServer(app);

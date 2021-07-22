@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     dispatch(refreshtoken());
-    const socket = io();
+    const socket = io("http://localhost:3000");
     dispatch({ type: GLOBALTYPES.SOCKET, payload: socket });
 
     return () => socket.close();
