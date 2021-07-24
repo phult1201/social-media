@@ -19,36 +19,18 @@ import {
 
 const CardFooter = ({ post }) => {
   const [isLike, setIsLike] = useState(false);
-  const [loadLike, setLoadLike] = useState(false);
   const [isShare, setIsShare] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const dispatch = useDispatch();
   const { auth, socket } = useSelector((state) => state);
-
-  const handleLike = async () => {
-    if (loadLike) return;
-    setIsLike(true);
-    setLoadLike(true);
-    await dispatch(likePost({ post, auth, socket }));
-    setLoadLike(false);
-  };
-
-  const handleUnLike = async () => {
-    if (loadLike) return;
-    setIsLike(false);
-    setLoadLike(true);
-    await dispatch(unLikePost({ post, auth, socket }));
-    setLoadLike(false);
-  };
-
   useEffect(() => {
     if (post.likes.find((like) => like._id === auth.user._id)) {
       setIsLike(true);
     } else {
       setIsLike(false);
     }
-  }, [post.likes, auth.user]);
+  }, [post.likes, auth.user._id]);
 
   useEffect(() => {
     if (auth.user.saved.find((saveId) => saveId === post._id)) {
@@ -57,6 +39,24 @@ const CardFooter = ({ post }) => {
       setSaved(false);
     }
   }, [post._id, auth.user.saved]);
+
+  // LikePost - UnLikePost
+  const handleLike = async () => {
+    await dispatch(likePost({ post, auth, socket }));
+  };
+
+  const handleUnLike = async () => {
+    await dispatch(unLikePost({ post, auth, socket }));
+  };
+
+  // SavePost - UnSavePost
+  const handleSave = async () => {
+    await dispatch(savePost({ post, auth }));
+  };
+
+  const handleUnSave = async () => {
+    await dispatch(unsavePost({ post, auth }));
+  };
 
   return (
     <div className="card_footer">
@@ -76,11 +76,9 @@ const CardFooter = ({ post }) => {
           />
         </div>
         {saved ? (
-          <BsBookmarksFill
-            onClick={() => dispatch(unsavePost({ post, auth }))}
-          />
+          <BsBookmarksFill onClick={handleUnSave} />
         ) : (
-          <BsBookmarks onClick={() => dispatch(savePost({ post, auth }))} />
+          <BsBookmarks onClick={handleSave} />
         )}
       </div>
 

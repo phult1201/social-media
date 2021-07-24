@@ -12,7 +12,6 @@ const socketServer = (socket) => {
 
   // Like-Post
   socket.on("likePost", (newPost) => {
-    // console.log(newPost);
     const ids = [...newPost.user.followers, newPost.user._id];
     const clients = users.filter((user) => ids.includes(user.id));
     if (clients.length > 0) {
@@ -24,7 +23,6 @@ const socketServer = (socket) => {
 
   // Unlike-Post
   socket.on("unLikePost", (newPost) => {
-    // console.log(newPost);
     const ids = [...newPost.user.followers, newPost.user._id];
     const clients = users.filter((user) => ids.includes(user.id));
     if (clients.length > 0) {

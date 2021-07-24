@@ -38,21 +38,19 @@ function App() {
   }, [dispatch, auth.access_token]);
 
   useEffect(() => {
-    function notifyMe() {
-      if (!("Notification" in window)) {
-        alert("This browser does not support desktop notification");
-      }
-      // Let's check whether notification permissions have already been granted
-      else if (Notification.permission === "granted") {
-      }
-      // Otherwise, we need to ask the user for permission
-      else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then(function (permission) {
-          // If the user accepts, let's create a notification
-          if (permission === "granted") {
-          }
-        });
-      }
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+    // Let's check whether notification permissions have already been granted
+    else if (Notification.permission === "granted") {
+    }
+    // Otherwise, we need to ask the user for permission
+    else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(function (permission) {
+        // If the user accepts, let's create a notification
+        if (permission === "granted") {
+        }
+      });
     }
   }, []);
 

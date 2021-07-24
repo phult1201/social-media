@@ -13,7 +13,8 @@ export const createNofity = ({ msg, auth, socket }) => {
       socket.emit("createNotify", {
         ...res.data.notify,
         user: {
-          username: auth.user.username,
+          lastname: auth.user.lastname,
+          firstname: auth.user.firstname,
           avatar: auth.user.avatar,
         },
       });
@@ -67,6 +68,24 @@ export const isReadNotify = ({ msg, auth }) => {
     });
     try {
       await patchDataAPI(`/isReadNotify/${msg._id}`, null, auth.access_token);
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};
+
+export const deleteAllNotifies = (access_token) => {
+  return async (dispatch) => {
+    dispatch({
+      type: NOTIFY_TYPES.DELETE_ALL_NOTIFIES,
+      payload: [],
+    });
+
+    try {
+      await deleteDataAPI(`/deleteAllNotify`, access_token);
     } catch (error) {
       return dispatch({
         type: GLOBALTYPES.ALERT,

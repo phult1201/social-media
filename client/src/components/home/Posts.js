@@ -25,6 +25,8 @@ const Posts = () => {
     setLoad(false);
   };
 
+  if (!homePosts) return;
+
   return (
     <div className="posts">
       {homePosts.posts.map((post) => (

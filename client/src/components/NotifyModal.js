@@ -2,7 +2,7 @@ import moment from "moment";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { isReadNotify } from "../redux/actions/notifyAction";
+import { deleteAllNotifies, isReadNotify } from "../redux/actions/notifyAction";
 import { NOTIFY_TYPES } from "../redux/constant";
 import Avatar from "./avatar/Avatar";
 import OutsideAlerter from "./custom_components/OutsideAlerter";
@@ -20,6 +20,20 @@ const NotifyModal = ({ setShowNotifyModal }) => {
       type: NOTIFY_TYPES.UPDATE_SOUND_NOTIFY,
       payload: !notify.sound,
     });
+  };
+
+  const handleDeleteAll = () => {
+    const newArr = notify.data.filter((noty) => noty.isRead === false);
+    if (newArr.length === 0)
+      return dispatch(deleteAllNotifies(auth.access_token));
+
+    if (
+      window.confirm(
+        `You have ${newArr.length} unread notices. Are you sure want to delete?`
+      )
+    ) {
+      return dispatch(deleteAllNotifies(auth.access_token));
+    }
   };
 
   return (
@@ -81,7 +95,9 @@ const NotifyModal = ({ setShowNotifyModal }) => {
         </div>
 
         <div className="notify_footer">
-          <div className="">Delete All</div>
+          <div className="" onClick={handleDeleteAll}>
+            Delete All
+          </div>
         </div>
       </div>
     </OutsideAlerter>

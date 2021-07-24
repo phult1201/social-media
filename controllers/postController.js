@@ -52,7 +52,9 @@ const postController = {
           path: "comments",
           populate: { path: "user likes", select: "-password" },
         });
-      res.status(200).json({ msg: "Success", result: posts.length, posts });
+      return res
+        .status(200)
+        .json({ msg: "Success", result: posts.length, posts });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -151,7 +153,7 @@ const postController = {
   getPost: async (req, res) => {
     try {
       const post = await Posts.findById(req.params.id)
-        .populate("user likes", "avatar lastname firstname username")
+        .populate("user likes", "avatar lastname firstname username followers")
         .populate({
           path: "comments",
           populate: { path: "user likes", select: "-password" },
