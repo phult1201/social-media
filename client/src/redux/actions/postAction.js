@@ -136,7 +136,7 @@ export const getPost = ({ detailPost, auth, id }) => {
 
 export const likePost = ({ post, auth, socket }) => {
   return async (dispatch) => {
-    const newPost = { ...post, likes: [...post.likes, auth.user] };
+    const newPost = { ...post, likes: [...post.likes, auth.user._id] };
     dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
 
     socket.emit("likePost", newPost);

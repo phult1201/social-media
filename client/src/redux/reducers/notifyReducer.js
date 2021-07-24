@@ -1,4 +1,4 @@
-import { NOTIFY_TYPES } from "../constant";
+import { EditData, NOTIFY_TYPES } from "../constant";
 
 const initialState = {
   loading: false,
@@ -19,6 +19,16 @@ const notifyReducer = (state = initialState, action) => {
           (item) =>
             item.id !== action.payload.id || item.url !== action.payload.url
         ),
+      };
+    case NOTIFY_TYPES.UPDATE_NOTIFY:
+      return {
+        ...state,
+        data: EditData(state.data, action.payload._id, action.payload),
+      };
+    case NOTIFY_TYPES.UPDATE_SOUND_NOTIFY:
+      return {
+        ...state,
+        sound: action.payload,
       };
     default:
       return state;

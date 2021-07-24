@@ -2,13 +2,26 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GLOBALTYPES, NOTIFY_TYPES, POST_TYPES } from "./redux/constant";
 
+const spawnNotification = (body, icon, url, title) => {
+  let options = {
+    body,
+    icon,
+  };
+
+  let n = new Notification(title, options);
+  n.onclick = (e) => {
+    e.preventDefault();
+    window.open(url, "_blank");
+  };
+};
+
 const SocketClient = () => {
   const { auth, socket } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   // joinUser
   useEffect(() => {
-    // socket.emit("joinUser", auth.user._id);
+    socket.emit("joinUser", auth.user._id);
   }, [socket, auth.user._id]);
 
   // like
@@ -66,6 +79,12 @@ const SocketClient = () => {
   useEffect(() => {
     socket.on("createNotifyToClient", (msg) => {
       dispatch({ type: NOTIFY_TYPES.CREATE_NOTIFY, payload: msg });
+      spawnNotification(
+        msg.user.lastname + " " + msg.user.firstname + " " + msg.text,
+        msg.user.avatar,
+        msg.url,
+        "MERN-SOCIAL"
+      );
     });
 
     return () => socket.off("createNotifyToClient");

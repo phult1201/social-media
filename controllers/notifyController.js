@@ -48,6 +48,31 @@ const notifyController = {
       return res.status(500).json({ msg: error.message });
     }
   },
+  isReadNotify: async (req, res) => {
+    try {
+      const notifies = await Notifies.findOneAndUpdate(
+        {
+          _id: req.params.id,
+        },
+        { isRead: true }
+      );
+
+      return res.status(200).json({ msg: "Update notify success", notifies });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message }, { isRead: true });
+    }
+  },
+  deleteAllNotifies: async (req, res) => {
+    try {
+      const notifies = await Notifies.deleteMany({
+        recipients: req.user._id,
+      });
+
+      return res.status(200).json({ msg: "Delete all success.", notifies });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message }, { isRead: true });
+    }
+  },
 };
 
 module.exports = notifyController;
