@@ -13,7 +13,7 @@ const Avatar = ({
   lastName = "",
 }) => {
   return (
-    <div className={`avatar ${className}`} style={{ ...style }}>
+    <div className={`avatar ${className}`} style={style}>
       <div className="avatar-container">
         <img
           src={avaImg}

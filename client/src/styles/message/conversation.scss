@@ -1,0 +1,114 @@
+.message.conversation {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1.6rem;
+  border: 1px solid #ddd;
+
+  .right-side {
+    align-self: stretch;
+
+    .conversation {
+      &__header {
+        height: 60px;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        background-color: #f8f8f8;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 5px;
+      }
+
+      &__body {
+        height: calc(100vh - 202px);
+        padding: 0 10px;
+        overflow-y: auto;
+
+        .chat {
+          &__display {
+            width: 100%;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+          }
+
+          &__row {
+            display: grid;
+            grid-template-columns: 70%;
+            margin-bottom: 10px;
+          }
+
+          &-auth__message {
+            justify-content: end;
+            justify-items: end;
+
+            .chat__text {
+              color: #fff;
+              padding: 9px 14px;
+              margin-bottom: 5px;
+              border: 1px solid #2f7ff0;
+              border-radius: 10px;
+              background-color: #2f7ff0;
+              letter-spacing: 0.2px;
+              font-size: 1.4rem;
+            }
+          }
+
+          &-other__message {
+            justify-content: start;
+            justify-items: start;
+
+            .chat__text {
+              color: #555;
+              padding: 9px 14px;
+              margin-bottom: 5px;
+              border: 1px solid #ddd;
+              border-radius: 10px;
+              background-color: #fcfcfc;
+              letter-spacing: 0.2px;
+              font-size: 1.4rem;
+            }
+          }
+
+          &__time {
+            margin: 0 4px;
+            font-size: 1.3rem;
+            color: #aaa;
+          }
+        }
+      }
+
+      &__footer {
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        border-top: 1px solid #ccc;
+
+        input {
+          width: 100%;
+          height: 49px;
+          border: none;
+          outline: none;
+        }
+
+        button {
+          border: none;
+          outline: none;
+          cursor: pointer;
+          background-color: transparent;
+
+          &:disabled {
+            cursor: not-allowed;
+          }
+          svg {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+  }
+}

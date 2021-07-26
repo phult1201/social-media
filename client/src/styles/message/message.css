@@ -1,0 +1,76 @@
+.message {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1.6rem;
+  height: calc(100vh - 90px);
+  border: 1px solid #ddd;
+}
+
+.message .left-side {
+  flex-basis: 300px;
+  align-self: stretch;
+  border-right: 1px solid #ddd;
+}
+
+.message .left-side__form {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+}
+
+.message .left-side__form input {
+  flex: 1;
+  outline: none;
+  border: none;
+  height: 100%;
+  background-color: #f8f8f8;
+  padding: 0 5px;
+}
+
+.message .left-side__form button {
+  display: none;
+}
+
+.message .left-side__chat-list {
+  height: calc(100vh - 160px);
+  overflow-y: auto;
+}
+
+.message .left-side__chat-list .chat-list_user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 5px;
+  transition: background-color 100ms ease;
+}
+
+.message .left-side__chat-list .chat-list_user .BsDot {
+  color: #ccc;
+  font-size: 4rem;
+}
+
+.message .left-side__chat-list .chat-list_user .BsDot.active {
+  color: forestgreen;
+}
+
+.message .left-side__chat-list .chat-list_user:hover {
+  background-color: #f1f1f1;
+}
+
+.message .right-side {
+  flex: 1;
+  align-self: center;
+}
+
+.message .right-side_logo {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}

@@ -45,6 +45,10 @@ export const NOTIFY_TYPES = {
   DELETE_ALL_NOTIFIES: "DELETE_ALL_NOTIFIES",
 };
 
+export const MESSAGE_TYPES = {
+  ADD_USER_MESSAGE: "ADD_USER_MESSAGE",
+};
+
 export const EditData = (data, id, post) => {
   const newData = data.map((item) => (item._id === id ? post : item));
   return newData;

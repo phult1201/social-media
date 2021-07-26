@@ -87,3 +87,7 @@ img {
 
 /* Notify */
 @import url("./styles/notify/notify.css");
+
+/* Message */
+@import url("./styles/message/message.css");
+@import url("./styles/message/conversation.css");

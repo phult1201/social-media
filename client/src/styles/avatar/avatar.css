@@ -45,6 +45,7 @@
 .avatar-name {
   font-size: 1.6rem;
   color: #555;
+  font-weight: bold;
   margin-left: 8px;
   display: inline-block;
 }
