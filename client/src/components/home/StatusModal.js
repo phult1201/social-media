@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GLOBALTYPES } from "../../redux/constant";
 import { createPost, updatePost } from "../../redux/actions/postAction";
 import Overlay from "../overlay/Overlay";
+import Icons from "../Icons";
 
 const StatusModal = () => {
   const { auth, status, socket } = useSelector((state) => state);
@@ -23,12 +24,11 @@ const StatusModal = () => {
     files.forEach((file) => {
       if (!file) return (err = "File does not exists.");
 
-      if (file.type !== "image/jpeg" && file.type !== "image/png")
-        return (err = "Image format is incorrect");
+      if (file.size > 1024 * 1024 * 5)
+        return (err = "The file largest is 50 MB.");
 
       return newImages.push(file);
     });
-
     if (err)
       return dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err } });
 
@@ -97,6 +97,14 @@ const StatusModal = () => {
     dispatch({ type: GLOBALTYPES.STATUS, payload: false });
   };
 
+  const showFileImage = (src) => {
+    return <img src={src} alt="images" />;
+  };
+
+  const showFileVideo = (src) => {
+    return <video controls src={src} alt="video" />;
+  };
+
   useEffect(() => {
     if (status.onEdit) {
       setContent(status.content);
@@ -124,20 +132,25 @@ const StatusModal = () => {
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
-
+            <Icons />
             <div className="show_images">
               {images.map((image, index) => (
                 <div key={index} className="show_images-box">
-                  <img
-                    src={
-                      image.camera
-                        ? image.camera
-                        : image.url
-                        ? image.url
-                        : URL.createObjectURL(image)
-                    }
-                    alt="images"
-                  />
+                  {image.camera ? (
+                    showFileImage(image.camera)
+                  ) : image.url ? (
+                    <>
+                      {image.url.match(/video/i)
+                        ? showFileVideo(image.url)
+                        : showFileImage(image.url)}
+                    </>
+                  ) : (
+                    <>
+                      {image.type.match(/video/i)
+                        ? showFileVideo(URL.createObjectURL(image))
+                        : showFileImage(URL.createObjectURL(image))}
+                    </>
+                  )}
                   <span onClick={() => handleDeleteImage(index)}>
                     <i className="fas fa-times"></i>
                   </span>
@@ -159,7 +172,7 @@ const StatusModal = () => {
                   <i className="fas fa-times"></i>
                 </span>
 
-                <canvas ref={refCanvas} />
+                <canvas ref={refCanvas} style={{ display: "none" }} />
               </div>
             )}
 
@@ -182,7 +195,7 @@ const StatusModal = () => {
                       name="file"
                       id="file"
                       multiple
-                      accept="image/*"
+                      accept="image/*, video/*"
                       onChange={handleChangeImages}
                     />
                   </div>

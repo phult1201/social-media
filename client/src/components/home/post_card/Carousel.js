@@ -35,7 +35,12 @@ const Carousel = ({ images, id }) => {
           key={index}
           className={index === current ? "slide active" : "slide"}
         >
-          {index === current && <img src={image.url} alt="carousel-img" />}
+          {index === current &&
+            (image.url.match(/video/i) ? (
+              <video controls src={image.url} alt="video" />
+            ) : (
+              <img src={image.url} alt="carousel-img" />
+            ))}
         </div>
       ))}
     </section>

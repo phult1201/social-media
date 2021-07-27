@@ -19,13 +19,13 @@ export const createPost = ({ content, images, auth, socket }) => {
         { content, images: media },
         auth.access_token
       );
+
       dispatch({
         type: POST_TYPES.CREATE_POST,
         payload: { ...res.data.newPost, user: auth.user },
       });
       dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } });
 
-      // Notification
       const msg = {
         id: res.data.newPost._id,
         text: "added a new post",
