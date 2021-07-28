@@ -3,7 +3,7 @@ export const checkImage = (file) => {
 
   if (!file) return (error = "File does not exists.");
 
-  if (file.size > 1024 * 1024 * 5)
+  if (file.size > 1024 * 1024 * 50)
     return (error = "The file largest is 50 MB.");
 
   // if (file.type !== "image/jpeg" && file.type !== "image/png")

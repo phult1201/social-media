@@ -91,3 +91,6 @@ img {
 /* Message */
 @import url("./styles/message/message.css");
 @import url("./styles/message/conversation.css");
+
+/* Icons */
+@import url("./styles/icons/icons.css");

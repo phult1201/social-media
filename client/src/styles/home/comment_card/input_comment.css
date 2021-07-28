@@ -1,7 +1,9 @@
 .input-comment {
   display: block;
-  position: relative;
   width: 100%;
+  position: relative;
+  background-color: #e8f0f2;
+  border-radius: 20px;
 }
 
 .input-comment .form-comment {
@@ -10,13 +12,24 @@
   justify-content: space-between;
 }
 
+.input-comment .form-comment .icons {
+  display: inline-block;
+  position: absolute;
+  right: 40px;
+  z-index: 1;
+}
+
+.input-comment .form-comment .icons__modal {
+  top: -76px;
+}
+
 .input-comment .form-comment input {
+  width: 85%;
   background-color: #e8f0f2;
-  border-radius: 20px;
-  flex-grow: 1;
   border: none;
   outline: none;
   padding: 10px;
+  border-radius: 20px;
 }
 
 .input-comment .form-comment button {

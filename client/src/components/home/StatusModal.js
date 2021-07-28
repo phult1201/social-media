@@ -13,6 +13,7 @@ const StatusModal = () => {
   const [stream, setStream] = useState(false);
   const [tracks, setTracks] = useState();
   const dispatch = useDispatch();
+  const inputRef = useRef();
   const videoRef = useRef();
   const refCanvas = useRef();
 
@@ -24,7 +25,7 @@ const StatusModal = () => {
     files.forEach((file) => {
       if (!file) return (err = "File does not exists.");
 
-      if (file.size > 1024 * 1024 * 5)
+      if (file.size > 1024 * 1024 * 50)
         return (err = "The file largest is 50 MB.");
 
       return newImages.push(file);
@@ -131,8 +132,13 @@ const StatusModal = () => {
               placeholder={`${auth.user.lastname}, what are you thinking`}
               value={content}
               onChange={(e) => setContent(e.target.value)}
+              ref={inputRef}
             />
-            <Icons />
+            <Icons
+              content={content}
+              setContent={setContent}
+              inputRef={inputRef}
+            />
             <div className="show_images">
               {images.map((image, index) => (
                 <div key={index} className="show_images-box">
@@ -159,7 +165,10 @@ const StatusModal = () => {
             </div>
 
             {stream && (
-              <div className="stream">
+              <div
+                className="stream"
+                style={{ position: "relative", margin: "10px 0" }}
+              >
                 <video
                   src=""
                   autoPlay
@@ -169,7 +178,17 @@ const StatusModal = () => {
                   height="100%"
                 ></video>
                 <span onClick={handleCloseStream}>
-                  <i className="fas fa-times"></i>
+                  <i
+                    className="fas fa-times"
+                    style={{
+                      position: "absolute",
+                      top: "5px",
+                      right: "5px",
+                      color: "#555",
+                      cursor: "pointer",
+                      fontSize: "1.6rem",
+                    }}
+                  ></i>
                 </span>
 
                 <canvas ref={refCanvas} style={{ display: "none" }} />
@@ -181,12 +200,14 @@ const StatusModal = () => {
                 <i
                   className="fas fa-camera upload-camera"
                   onClick={handleCapture}
+                  style={{ cursor: "pointer" }}
                 />
               ) : (
                 <>
                   <i
                     className="fas fa-camera upload-camera"
                     onClick={handleStream}
+                    style={{ cursor: "pointer" }}
                   />
                   <div className="upload-image">
                     <i className="fas fa-image" />

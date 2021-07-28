@@ -50,7 +50,8 @@
   transition-duration: 500ms;
 }
 
-.carousel .slide img {
+.carousel .slide img,
+.carousel .slide video {
   margin-bottom: 0;
   width: 100%;
   max-height: 500px;

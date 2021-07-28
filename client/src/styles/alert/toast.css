@@ -12,7 +12,7 @@
   min-width: 320px;
   max-width: 360px;
   padding: 12px 0;
-  z-index: 99;
+  z-index: 999;
   animation: slideIn 500ms;
 }
 

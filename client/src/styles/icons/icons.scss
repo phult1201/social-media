@@ -1,0 +1,32 @@
+.icons {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+
+  span {
+    cursor: pointer;
+  }
+
+  &__modal {
+    position: absolute;
+    top: 24px;
+    right: 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fafafa;
+    z-index: 1;
+  }
+  &__list {
+    width: 400px;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      cursor: pointer;
+      font-size: 1.4rem;
+      margin: 2px 8px;
+    }
+  }
+}

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createComment } from "../../../redux/actions/commentAction";
+import Icons from "../../Icons";
 
 const InputComment = ({ children, post, onReply, setOnReply }) => {
   const [content, setContent] = useState("");
   const { auth, socket } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const inputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +31,10 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
       setContent("");
     });
   };
+
+  const handleChangeInput = (e) => {
+    setContent(e.target.value);
+  };
   return (
     <div className="input-comment">
       <form className="form-comment" onSubmit={handleSubmit}>
@@ -37,8 +43,10 @@ const InputComment = ({ children, post, onReply, setOnReply }) => {
           type="text"
           placeholder="Add your comment..."
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={handleChangeInput}
+          ref={inputRef}
         />
+        <Icons content={content} setContent={setContent} inputRef={inputRef} />
         <button type="submit">
           <i className="fas fa-feather-alt"></i>
         </button>
