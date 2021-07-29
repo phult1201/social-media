@@ -1,7 +1,7 @@
 import React from "react";
 import Avatar from "../avatar/Avatar";
 
-const UserCard = ({ user, children, className }) => {
+const UserCard = ({ user, className, children }) => {
   return (
     <div className={`card-user ${className}`}>
       <Avatar
@@ -11,8 +11,9 @@ const UserCard = ({ user, children, className }) => {
         avaName={true}
         firstName={user.firstname}
         lastName={user.lastname}
-      />
-      {children}
+      >
+        {children}
+      </Avatar>
     </div>
   );
 };

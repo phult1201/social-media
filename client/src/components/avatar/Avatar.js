@@ -11,6 +11,7 @@ const Avatar = ({
   avaName = false,
   firstName = "",
   lastName = "",
+  children,
 }) => {
   return (
     <div className={`avatar ${className}`} style={style}>
@@ -43,6 +44,9 @@ const Avatar = ({
           <small>
             {firstName} {lastName}
           </small>
+          <div className="avatar-name__message">
+            <small>{children}</small>
+          </div>
         </div>
       )}
     </div>

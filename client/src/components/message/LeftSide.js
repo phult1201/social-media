@@ -59,21 +59,35 @@ const LeftSide = ({ style, className }) => {
 
       <div className="left-side__chat-list">
         {searchUsers.length === 0 &&
-          message.users.map((user) => (
+          message.users.map((user, index) => (
             <div
-              key={user._id}
+              key={index}
               className="chat-list_user"
               onClick={() => handleAddUser(user)}
             >
-              <UserCard user={user} />
+              <UserCard user={user}>
+                {user.text && (
+                  <>
+                    {user.text.length > 10
+                      ? `${user.text.substring(0, 12)}...`
+                      : user.text.substring(0, 12)}
+                  </>
+                )}
+                {user.media.length > 0 && (
+                  <>
+                    {user.media.length} <i className="fas fa-image" />
+                  </>
+                )}
+              </UserCard>
+
               <BsDot className={`BsDot ${isActive(user)}`} />
             </div>
           ))}
 
         {searchUsers.length !== 0 &&
-          searchUsers.map((user) => (
+          searchUsers.map((user, index) => (
             <div
-              key={user._id}
+              key={index}
               className="chat-list_user"
               onClick={() => handleAddUser(user)}
             >

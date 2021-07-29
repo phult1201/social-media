@@ -50,6 +50,11 @@
   display: inline-block;
 }
 
+.avatar-name__message small {
+  font-weight: normal;
+  color: cornflowerblue;
+}
+
 .avatar-edit {
   background-color: rgba(32, 44, 80, 0.5);
   width: 100%;

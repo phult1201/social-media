@@ -46,7 +46,8 @@ export const NOTIFY_TYPES = {
 };
 
 export const MESSAGE_TYPES = {
-  ADD_USER_MESSAGE: "ADD_USER_MESSAGE",
+  ADD_USER: "ADD_USER",
+  ADD_MESSAGE: "ADD_MESSAGE",
 };
 
 export const EditData = (data, id, post) => {

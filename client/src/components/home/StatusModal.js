@@ -4,6 +4,7 @@ import { GLOBALTYPES } from "../../redux/constant";
 import { createPost, updatePost } from "../../redux/actions/postAction";
 import Overlay from "../overlay/Overlay";
 import Icons from "../Icons";
+import { showFileImage, showFileVideo } from "../../utils/showFileMedia";
 
 const StatusModal = () => {
   const { auth, status, socket } = useSelector((state) => state);
@@ -96,14 +97,6 @@ const StatusModal = () => {
     setImages([]);
     if (tracks) tracks.stop();
     dispatch({ type: GLOBALTYPES.STATUS, payload: false });
-  };
-
-  const showFileImage = (src) => {
-    return <img src={src} alt="images" />;
-  };
-
-  const showFileVideo = (src) => {
-    return <video controls src={src} alt="video" />;
   };
 
   useEffect(() => {

@@ -44,6 +44,13 @@
     font-weight: bold;
     margin-left: 8px;
     display: inline-block;
+
+    &__message {
+      small {
+        font-weight: normal;
+        color: rgb(100, 149, 237);
+      }
+    }
   }
 
   &-edit {

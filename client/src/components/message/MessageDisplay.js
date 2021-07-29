@@ -1,7 +1,8 @@
 import React from "react";
 import Avatar from "../avatar/Avatar";
+import { showFileVideo, showFileImage } from "../../utils/showFileMedia";
 
-const MessageDisplay = ({ user }) => {
+const MessageDisplay = ({ user, msg }) => {
   return (
     <>
       <div className="chat__avatar">
@@ -13,14 +14,17 @@ const MessageDisplay = ({ user }) => {
           lastName={user.lastname}
         />
       </div>
-      <div className="chat__text">
-        1500s, when an unknown printer took a galley of type and scrambled it to
-        make a type specimen book. It has survived not only five centuries, but
-        also the leap into electronic typesetting, remaining essentially
-        unchanged. It was popularised in the 1960s with the release of Letraset
-        sheets containing Lorem Ipsum passages, and more recently with
+      {msg.text && <div className="chat__text">{msg.text}</div>}
+      {msg.media.map((item, index) => (
+        <div className="chat__text-media-file" key={index}>
+          {item.url.match(/video/i)
+            ? showFileVideo(item.url)
+            : showFileImage(item.url)}
+        </div>
+      ))}
+      <div className="chat__time">
+        {new Date(msg.createdAt).toLocaleString()}
       </div>
-      <div className="chat__time">April 09</div>
     </>
   );
 };
