@@ -84,6 +84,16 @@
   font-size: 1.4rem;
 }
 
+.message.conversation .right-side .conversation__body .chat-other__message .chat__text-media-file {
+  max-width: 300px;
+}
+
+.message.conversation .right-side .conversation__body .chat-other__message .chat__text-media-file img,
+.message.conversation .right-side .conversation__body .chat-other__message .chat__text-media-file video {
+  object-fit: contain;
+  width: 100%;
+}
+
 .message.conversation .right-side .conversation__body .chat__time {
   margin: 0 4px;
   font-size: 1.3rem;

@@ -1,20 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataAPI } from "../../utils/fetchData";
 import { GLOBALTYPES } from "../../redux/constant";
 import { useHistory, useParams } from "react-router-dom";
 import UserCard from "../header/UserCard";
-import { addUser } from "../../redux/actions/messageAction";
+import { addUser, getConversations } from "../../redux/actions/messageAction";
 import { BsDot } from "react-icons/bs";
 
 const LeftSide = ({ style, className }) => {
   const { auth, message } = useSelector((state) => state);
   const [search, setSearch] = useState("");
   const [searchUsers, setSearchUsers] = useState([]);
+  const [page, setPage] = useState(0);
 
+  const pageEnd = useRef(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
+
+  useEffect(() => {
+    if (message.firstLoad) return;
+    dispatch(getConversations({ auth }));
+  }, [dispatch, auth, message.firstLoad]);
+
+  // Load-more
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setPage((p) => p + 1);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(pageEnd.current);
+  }, [setPage]);
+
+  useEffect(() => {
+    if (message.resultUsers >= (page - 1) * 9 && page > 1) {
+      dispatch(getConversations({ auth, page }));
+    }
+  }, [dispatch, message.resultUsers, page, auth]);
 
   const isActive = (user) => {
     if (id === user._id) return "active";
@@ -40,9 +67,9 @@ const LeftSide = ({ style, className }) => {
   };
 
   const handleAddUser = (user) => {
+    dispatch(addUser({ user, message }));
     setSearch("");
     setSearchUsers([]);
-    dispatch(addUser({ user, message }));
     return history.push(`/message/${user._id}`);
   };
 
@@ -66,13 +93,9 @@ const LeftSide = ({ style, className }) => {
               onClick={() => handleAddUser(user)}
             >
               <UserCard user={user}>
-                {user.text && (
-                  <>
-                    {user.text.length > 10
-                      ? `${user.text.substring(0, 12)}...`
-                      : user.text.substring(0, 12)}
-                  </>
-                )}
+                {user.text.length > 12
+                  ? `${user.text.substring(0, 12)}...`
+                  : user.text}{" "}
                 {user.media.length > 0 && (
                   <>
                     {user.media.length} <i className="fas fa-image" />
@@ -95,6 +118,10 @@ const LeftSide = ({ style, className }) => {
               <BsDot className={`BsDot ${isActive(user)}`} />
             </div>
           ))}
+
+        <button ref={pageEnd} style={{ opacity: "0" }}>
+          Load More
+        </button>
       </div>
     </div>
   );

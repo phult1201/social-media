@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GLOBALTYPES, NOTIFY_TYPES, POST_TYPES } from "./redux/constant";
 import audioSwiftly from "./audio/swiftly-610.mp3";
+import {
+  GLOBALTYPES,
+  MESSAGE_TYPES,
+  NOTIFY_TYPES,
+  POST_TYPES,
+} from "./redux/constant";
 
 const spawnNotification = (body, icon, url, title) => {
   let options = {
@@ -100,6 +105,16 @@ const SocketClient = () => {
 
     return () => socket.off("removeNotifyToClient");
   }, [socket, dispatch]);
+
+  // Message
+  useEffect(() => {
+    socket.on("addMessageToClient", (msg) => {
+      dispatch({ type: MESSAGE_TYPES.ADD_MESSAGE, payload: msg });
+    });
+
+    return () => socket.off("addMessageToClient");
+  }, [socket, dispatch]);
+
   return (
     <>
       <audio controls ref={audioRef} style={{ display: "none" }}>
