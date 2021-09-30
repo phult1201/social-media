@@ -11,7 +11,11 @@ const PostThumb = ({ posts, result }) => {
       {posts.map((post) => (
         <Link key={post._id} to={`/post/${post._id}`}>
           <div className="post_thumb_display">
-            <img src={post.images[0].url} alt="post_thumb" />
+            {post.images[0].url.match(/video/i) ? (
+              <video controls src={post.images[0].url} alt="post_thumb" />
+            ) : (
+              <img src={post.images[0].url} alt="post_thumb" />
+            )}
 
             <div className="post_thumb_display_menu">
               <i className="far fa-heart">{post.likes.length}</i>

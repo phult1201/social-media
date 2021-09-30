@@ -1,21 +1,14 @@
 import { MESSAGE_TYPES, GLOBALTYPES, DeleteData } from "../constant";
 import { deleteDataAPI, getDataAPI, postDataAPI } from "../../utils/fetchData";
 
-export const addUser = ({ user, message }) => {
-  return (dispatch) => {
-    if (message.users.every((item) => item._id !== user._id)) {
-      dispatch({
-        type: MESSAGE_TYPES.ADD_USER,
-        payload: { ...user, text: "", media: [] },
-      });
-    }
-  };
-};
-
 export const addMessage = ({ msg, auth, socket }) => {
   return async (dispatch) => {
     dispatch({ type: MESSAGE_TYPES.ADD_MESSAGE, payload: msg });
-    socket.emit("addMessage", msg);
+    const { _id, avatar, firstname, lastname, username } = auth.user;
+    socket.emit("addMessage", {
+      ...msg,
+      user: { _id, avatar, firstname, lastname, username },
+    });
     try {
       await postDataAPI("/message", msg, auth.access_token);
     } catch (error) {
@@ -110,6 +103,21 @@ export const deleteMessages = ({ msg, data, auth }) => {
       return dispatch({
         type: GLOBALTYPES.ALERT,
         payload: { error: error.response.data.msg },
+      });
+    }
+  };
+};
+
+export const deletConversation = ({ auth, id }) => {
+  return async (dispatch) => {
+    dispatch({ type: MESSAGE_TYPES.DELETE_CONVERSATION, payload: id });
+
+    try {
+      await deleteDataAPI(`/conversation/${id}`, auth.access_token);
+    } catch (error) {
+      return dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "Some thing wrong" },
       });
     }
   };

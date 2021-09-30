@@ -57,7 +57,10 @@ const authController = {
     try {
       const { email, password } = req.body;
       Users.findOne({ email })
-        .populate("followers following", "-password")
+        .populate(
+          "followers following",
+          "avatar username firstname lastname followers following"
+        )
         .exec(async (error, user) => {
           if (error) return res.status(400).json({ msg: error });
           if (!user)
@@ -107,7 +110,10 @@ const authController = {
             return res.status(401).json({ msg: "Invalid authentication. " });
           const user = await Users.findById(result._id)
             .select("-password")
-            .populate("followers following", "-password");
+            .populate(
+              "followers following",
+              "avatar username firstname lastname followers following"
+            );
           if (!user)
             return res.status(400).json({ msg: "User doesn't exists" });
           const access_token = createAccessToken({ _id: result._id });

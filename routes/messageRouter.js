@@ -11,5 +11,10 @@ router.get(
 router.get("/messages/:id", authMiddleware, messageController.getMessages);
 router.post("/message", authMiddleware, messageController.createMessage);
 router.delete("/message/:id", authMiddleware, messageController.deleteMessage);
+router.delete(
+  "/conversation/:id",
+  authMiddleware,
+  messageController.deleteConversation
+);
 
 module.exports = router;

@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getDataAPI } from "../../utils/fetchData";
-import { GLOBALTYPES } from "../../redux/constant";
-import { useHistory, useParams } from "react-router-dom";
-import UserCard from "../header/UserCard";
-import { addUser, getConversations } from "../../redux/actions/messageAction";
+import React, { useEffect, useRef, useState } from "react";
 import { BsDot } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getConversations } from "../../redux/actions/messageAction";
+import { GLOBALTYPES, MESSAGE_TYPES } from "../../redux/constant";
+import { getDataAPI } from "../../utils/fetchData";
+import UserCard from "../header/UserCard";
 
 const LeftSide = ({ style, className }) => {
-  const { auth, message } = useSelector((state) => state);
+  const { auth, message, online } = useSelector((state) => state);
   const [search, setSearch] = useState("");
   const [searchUsers, setSearchUsers] = useState([]);
   const [page, setPage] = useState(0);
@@ -16,7 +16,6 @@ const LeftSide = ({ style, className }) => {
   const pageEnd = useRef(null);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { id } = useParams();
 
   useEffect(() => {
     if (message.firstLoad) return;
@@ -43,10 +42,16 @@ const LeftSide = ({ style, className }) => {
     }
   }, [dispatch, message.resultUsers, page, auth]);
 
-  const isActive = (user) => {
-    if (id === user._id) return "active";
-    return "";
-  };
+  // Check User Online-Offline
+  useEffect(() => {
+    if (message.firstLoad)
+      dispatch({ type: MESSAGE_TYPES.CHECK_ONLINE_OFFLINE, payload: online });
+  }, [online, message.firstLoad, dispatch]);
+
+  // const isActive = (user) => {
+  //   if (id === user._id) return "active";
+  //   return "";
+  // };
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -67,7 +72,12 @@ const LeftSide = ({ style, className }) => {
   };
 
   const handleAddUser = (user) => {
-    dispatch(addUser({ user, message }));
+    dispatch({
+      type: MESSAGE_TYPES.ADD_USER,
+      payload: { ...user, text: "", media: [] },
+    });
+    dispatch({ type: MESSAGE_TYPES.CHECK_ONLINE_OFFLINE, payload: online });
+
     setSearch("");
     setSearchUsers([]);
     return history.push(`/message/${user._id}`);
@@ -103,7 +113,11 @@ const LeftSide = ({ style, className }) => {
                 )}
               </UserCard>
 
-              <BsDot className={`BsDot ${isActive(user)}`} />
+              {user.online ? (
+                <BsDot className={`BsDot active`} />
+              ) : (
+                <BsDot className={`BsDot`} />
+              )}
             </div>
           ))}
 
@@ -115,7 +129,6 @@ const LeftSide = ({ style, className }) => {
               onClick={() => handleAddUser(user)}
             >
               <UserCard user={user} />
-              <BsDot className={`BsDot ${isActive(user)}`} />
             </div>
           ))}
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaFeatherAlt, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import {
   addMessage,
+  deletConversation,
   getMessages,
   loadMoreMessages,
 } from "../../redux/actions/messageAction";
@@ -30,6 +31,7 @@ const RightSide = ({ className, style }) => {
 
   const dispatch = useDispatch();
   const { id } = useParams();
+  const history = useHistory();
 
   const inputTextRef = useRef(null);
   const refDisplay = useRef(null);
@@ -150,13 +152,21 @@ const RightSide = ({ className, style }) => {
     }
   };
 
+  const handleDeleteConversation = async () => {
+    dispatch(deletConversation({ auth, id }));
+    return history.push("/message");
+  };
+
   return (
     <div className={className} style={style}>
       <div className="conversation__header">
         {user.length !== 0 && (
           <>
             <UserCard user={user} />
-            <FaTrash style={{ color: "crimson", cursor: "pointer" }} />
+            <FaTrash
+              style={{ color: "crimson", cursor: "pointer" }}
+              onClick={handleDeleteConversation}
+            />
           </>
         )}
       </div>
